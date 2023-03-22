@@ -36,7 +36,7 @@
                 </div>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><a href="" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                      <li><a href="{{route("categoria.adicionar")}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                     </ul>
                   </div>
               </li>
@@ -46,12 +46,12 @@
                 </button>
                 <div class="collapse show" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
+                    <li><a href="{{route('fornecedor.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                   </ul>
                 </div>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><a href="" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                      <li><a href="{{route('fornecedor.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                     </ul>
                   </div>
               </li>

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\FornecedoresController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,6 @@ Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.catego
 Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('auth');
 
 
+Route::get('/fornecedores', [FornecedoresController::class, 'index'])->name('fornecedor.lista')->middleware('auth');
+Route::get('/fornecedoresadd', [FornecedoresController::class, 'create'])->name('fornecedor.add')->middleware('auth');
+Route::post('/criarfornecedores', [FornecedoresController::class, 'store'])->name('fornecedor.criar')->middleware('auth');

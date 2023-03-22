@@ -88,10 +88,8 @@
                                     <table class="table align-items-center justify-content-center mb-0">
                                         <thead class="bg-gray-100">
                                             <tr>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7">Categoria
+                                                <th class="text-secondary text-xs font-weight-semibold opacity-7">Fornecedor
                                                 </th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Fornecedor</th>
                                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Mais
                                                     Informações</th>
                                             </tr>
@@ -107,16 +105,13 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-normal mb-0">{{$fornecedor->categorias->first()->categoria ?? ''}}</p>
-                                                </td>
-                                                <td>
                                                     <button type="button" class="btn btn-dark btn-icon px-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                                         </svg>
                                                     </button>
                                                     <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal">
+                                                        data-bs-target="#exampleModal{{$fornecedor->id}}">
                                                         <i class="fa-sharp fa-solid fa-eye"></i>
                                                     </button>
                                                         <button type="submit" class="btn btn-dark btn-icon px-3">
@@ -128,8 +123,8 @@
                                                                 </path>
                                                             </svg>
                                                         </button>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+
+                                                    <div class="modal fade" id="exampleModal{{$fornecedor->id}}" tabindex="-1"
                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -142,7 +137,10 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    ...
+                                                                    <p class="text-sm font-weight-normal mb-0">Categoria: {{$fornecedor->categorias->first()->nome ?? ''}}</p>
+                                                                    <p class="text-sm font-weight-normal mb-0">Telefone: {{$fornecedor->telefone}}</p>
+                                                                    <p class="text-sm font-weight-normal mb-0">CNPJ: {{$fornecedor->cnpj}}</p>
+                                                                    <p class="text-sm font-weight-normal mb-0">Endereço: {{$fornecedor->endereco}}</p>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-white"

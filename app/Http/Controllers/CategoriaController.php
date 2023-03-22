@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
 use App\Models\Categoria;
-
+use Illuminate\Http\Request;
 class CategoriaController extends Controller
 {
     /**
@@ -22,15 +22,25 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categoria.adicionar');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoriaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:categorias,nome,NULL,id'
+        ], [
+            'nome.required' => 'O campo categoria é obrigatório.',
+            'nome.unique' => 'Categoria já cadastrada.'
+        ]);
+
+        $category = new Categoria(['nome' => $request->input('nome')]);
+        $category->save();
+
+        return redirect()->route('categoria.lista')->withErrors(['categoria' => 'Categoria já existente.']);
     }
 
     /**

@@ -53,7 +53,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Nome Categoria</label>
-                    <input class="form-control" name="categoria" type="text">
+                    <input class="form-control" name="nome" type="text">
                 </div>
                 <div class="text-center">
                     <button type="submit"
