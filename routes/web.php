@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FornecedoresController;
-
+use App\Http\Controllers\ClienteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +34,5 @@ Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name(
 Route::get('/fornecedores', [FornecedoresController::class, 'index'])->name('fornecedor.lista')->middleware('auth');
 Route::get('/fornecedoresadd', [FornecedoresController::class, 'create'])->name('fornecedor.add')->middleware('auth');
 Route::post('/criarfornecedores', [FornecedoresController::class, 'store'])->name('fornecedor.criar')->middleware('auth');
+
+Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');

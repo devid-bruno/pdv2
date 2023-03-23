@@ -36,7 +36,7 @@ class UsersController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect('dashboard');
         }
-        return redirect()->route('inicio')->withErrors(['login' => 'Credenciais inválidas.']);
+        return redirect()->route('home')->withErrors(['login' => 'Credenciais inválidas.']);
     }
 
     /**
@@ -119,7 +119,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect()->route('users')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('adicionar')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     /**
