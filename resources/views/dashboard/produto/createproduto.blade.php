@@ -49,7 +49,7 @@
                 <div class="pb-3 card-body">
 
 
-                    <form method="post" action="{{route('store.produto')}}">
+                    <form method="post" action="{{route('produto.criar')}}">
                         @csrf
                         <div class="container-fluid py-4 px-5">
                             <form>
@@ -57,53 +57,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Nome Produto</label>
-                                            <input type="text" name="nome" class="form-control" id="exampleFormControlInput1"
+                                            <input type="text" name="nome_produto" class="form-control" id="exampleFormControlInput1"
                                                 placeholder="Nome Produto">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Descrição produto</label>
-                                            <input type="text" name="descricao" placeholder="Descrição produto<" class="form-control">
+                                            <input type="text" name="descricao_produto" placeholder="Descrição produto<" class="form-control">
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    </div><div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Selecione o Fornecedor</label>
-                                            <div class="input-group">
-                                                <select class="form-select" name="fornecedor_id" id="fornecedor_id">
-                                                    @foreach ($fornecedores as $fornecedor)
-                                                        <option value="{{ $fornecedor->id }}">
-                                                            {{ $fornecedor->nome }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Valor Unitário</label>
-                                            <div class="input-group">
-                                                <input type="text" name="valor_unitario" class="form-control" placeholder="Valor Unitário">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Valor Bruto</label>
-                                            <div class="input-group">
-                                                <input type="text" name="valor_bruto" class="form-control" placeholder="Valor Bruto">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Quantidade</label>
-                                            <div class="input-group">
-                                                <input type="text" name="quantidade" class="form-control" placeholder="Quantidade">
-                                            </div>
+                                            <label>Marca produto</label>
+                                            <input type="text" name="marca_produto" placeholder="Descrição produto<" class="form-control">
                                         </div>
                                     </div>
                                 </div>

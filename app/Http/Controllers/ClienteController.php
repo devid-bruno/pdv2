@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -13,7 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view('dashboard.cliente.index');
+        $clientes = Cliente::all();
+        return view('dashboard.cliente.index', compact('clientes'));
     }
 
     /**
@@ -21,15 +23,31 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreClienteRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:clientes,nome,NULL,id',
+            'cpf' => 'required|string|max:255|unique:clientes,cpf,NULL,id',
+            'endereco' => 'required|string|max:255|unique:clientes,endereco,NULL,id',
+            'telefone' => 'required|string|max:255|unique:clientes,telefone,NULL,id'
+        ]);
+
+        $cliente = new Cliente([
+            'nome' => $request->input('nome'),
+            'cpf' => $request->input('cpf'),
+            'endereco' => $request->input('endereco'),
+            'telefone' => $request->input('telefone'),
+        ]);
+
+        $cliente->save();
+
+        return redirect()->route('clientes');
     }
 
     /**

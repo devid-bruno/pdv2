@@ -60,7 +60,6 @@ class UsersController extends Controller
 
         $role = Role::findOrFail($request->input('role_id'));
 
-
         DB::transaction(function () use ($user, $role) {
             $user->save();
             $user->roles()->attach($role);

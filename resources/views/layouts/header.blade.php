@@ -19,7 +19,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand d-flex align-items-center m-0" href="{{route('home')}}">
+      <a class="navbar-brand d-flex align-items-center m-0" href="{{route('users')}}">
         <span class="font-weight-bold text-lg">Corporate UI</span>
       </a>
     </div>
@@ -52,6 +52,26 @@
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       <li><a href="{{route('fornecedor.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                    </ul>
+                  </div>
+              </li>
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                  Produtos
+                </button>
+                <div class="collapse show" id="home-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{{route('produto.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
+                  </ul>
+                </div>
+                <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="{{route('estoque.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
+                    </ul>
+                  </div>
+                <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="{{route('produto.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                     </ul>
                   </div>
               </li>

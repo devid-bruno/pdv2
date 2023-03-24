@@ -5,6 +5,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FornecedoresController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\EstoqueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,7 @@ use App\Http\Controllers\ClienteController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [UsersController::class, 'index'])->name('home');
+Route::get('/', [UsersController::class, 'index'])->name('login');
 Route::get("/dashboard", [UsersController::class, 'show'])->name('users');
 Route::get('/register', [UsersController::class, 'create'])->name('adicionar');
 Route::post('/registro', [UsersController::class, 'store'])->name('users.register');
@@ -36,3 +38,13 @@ Route::get('/fornecedoresadd', [FornecedoresController::class, 'create'])->name(
 Route::post('/criarfornecedores', [FornecedoresController::class, 'store'])->name('fornecedor.criar')->middleware('auth');
 
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
+Route::get('/lista', [ClienteController::class, 'create'])->name('clientes.lista');
+Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.criar');
+
+Route::get('/produtos', [ProdutoController::class, 'index'])->name('produto.lista');
+Route::get('/produto', [ProdutoController::class, 'create'])->name('produto.add');
+Route::post('/addproduto', [ProdutoController::class, 'store'])->name('produto.criar');
+
+
+Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add');
+Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
