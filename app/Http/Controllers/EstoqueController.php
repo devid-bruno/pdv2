@@ -16,7 +16,9 @@ class EstoqueController extends Controller
      */
     public function index()
     {
-
+        $produtos = Produto::all();
+        $estoques = Estoque::all();
+        return view('dashboard.estoque.estoque', compact('produtos', 'estoques'));
     }
 
     /**

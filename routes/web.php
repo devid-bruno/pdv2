@@ -48,3 +48,6 @@ Route::post('/addproduto', [ProdutoController::class, 'store'])->name('produto.c
 
 Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add');
 Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
+
+
+Route::get('/testando', [EstoqueController::class, 'index'])->name('teste');

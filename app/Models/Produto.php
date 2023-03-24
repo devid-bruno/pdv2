@@ -11,4 +11,8 @@ class Produto extends Model
 
     protected $fillable = ['nome_produto', 'descricao_produto', 'marca_produto'];
 
+    public function estoques()
+     {
+         return $this->belongsToMany(Estoque::class);
+     }
 }

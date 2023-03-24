@@ -100,8 +100,8 @@ navbar-scroll="true">
                 </tr>
             </thead>
             <tbody>
+                @foreach ($produtos as $produto)
                 <tr>
-                    @foreach ($produtos as $produto)
                     <td>
                         <div class="d-flex px-2">
                             <div class="my-auto">
@@ -152,7 +152,9 @@ navbar-scroll="true">
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p class="text-sm font-weight-normal mb-0">Estoque: {{$produto->estoques->first()->valor_unitario ?? 'sem valor'}}</p>
+                                        <p class="text-sm font-weight-normal mb-0">Estoque: {{$produto->estoques->first()->quantidade ?? 'sem valor'}}</p>
+                                        <p class="text-sm font-weight-normal mb-0">Valor Unitário: {{$produto->estoques->first()->valor_unitario ?? 'sem valor'}}</p>
+                                        <p class="text-sm font-weight-normal mb-0">Valor Total: {{$produto->estoques->first()->valor_total ?? 'sem valor'}}</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-white"
@@ -166,8 +168,8 @@ navbar-scroll="true">
                     </td>
                     <td>
                     </td>
-                    @endforeach
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
