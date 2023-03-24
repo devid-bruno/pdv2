@@ -7,6 +7,7 @@ use App\Http\Controllers\FornecedoresController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\EstoqueController;
+use App\Http\Controllers\PedidoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,4 +51,6 @@ Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add'
 Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
 
 
-Route::get('/testando', [EstoqueController::class, 'index'])->name('teste');
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedido.lista');
+Route::get('/pedido', [PedidoController::class, 'create'])->name('pedido.add');
+Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds');

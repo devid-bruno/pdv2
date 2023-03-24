@@ -75,6 +75,21 @@
                     </ul>
                   </div>
               </li>
+              <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                  Pedidos
+                </button>
+                <div class="collapse show" id="home-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{{route('pedido.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
+                  </ul>
+                </div>
+                <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="{{route('pedido.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                    </ul>
+                  </div>
+              </li>
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
               Usuários
