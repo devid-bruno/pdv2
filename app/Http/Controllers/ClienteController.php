@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -14,7 +15,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::select('id', 'nome')->withCount('pedidos')->orderBy('nome')->get();
+
         return view('dashboard.cliente.index', compact('clientes'));
     }
 

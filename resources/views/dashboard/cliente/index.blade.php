@@ -164,7 +164,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm text-dark font-weight-semibold mb-0"></p>
+                                        <p class="text-sm text-dark font-weight-semibold mb-0">{{ $cliente->pedidos_count }}</p>
                                         </p>
                                     </td>
                                     <td class="align-middle">
@@ -190,8 +190,8 @@
                                             </button>
                                         </div>
                                     </td>
-                                    @endforeach
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

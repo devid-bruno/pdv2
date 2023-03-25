@@ -7,6 +7,7 @@ use App\Http\Controllers\FornecedoresController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\EstoqueController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PedidoController;
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,7 @@ Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedido.lista');
 Route::get('/pedido', [PedidoController::class, 'create'])->name('pedido.add');
 Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds');
+Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedido.edit')->middleware('auth');
+Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
+
+Route::get("/pdf/{id}", [InvoiceController::class, 'index']);

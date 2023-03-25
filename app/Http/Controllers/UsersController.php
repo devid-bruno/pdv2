@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class UsersController extends Controller
 {
+
+    public function chartData()
+{
+    $data = Pedido::select(DB::raw("DATE_FORMAT(created_at,'%m-%Y') as month"),DB::raw("SUM(valor_total) as total"))
+                ->groupBy('month')
+                ->pluck('total','month');
+    return view('teste', compact('data'));
+}
     /**
      * Display a listing of the resource.
      */
