@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Pedido;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class UsersController extends Controller
 {
     /**
@@ -73,11 +74,32 @@ class UsersController extends Controller
      */
     public function show()
     {
+        $hoje = Carbon::today();
+        $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
+
+        $dataInicioSemana = $hoje->startOfWeek();
+        $valorTotal = Pedido::where('created_at', '>=', $dataInicioSemana)->where('status_id', 1)->sum('valor_total');
+
+        $dataAno = $hoje->startOfYear();
+        $valorTotalanual = Pedido::where('created_at', '>=', $dataAno)->where('status_id', 1)->sum('valor_total');
+
+        $datames = $hoje->startOfMonth();
+        $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
         if(Auth::check()){
-            return view('dashboard.home');
+            return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes'));
         }
-        return redirect()->route('home')->withErrors(['login' => 'Favor, fazer login.']);
+        return redirect()->route('login')->withErrors(['login' => 'Favor, fazer login.']);
     }
+
+    public function vendasSemanais()
+{
+
+
+        if (Auth::check()) {
+            return view('dashboard.home', compact('valorTotal'));
+        }
+        return redirect()->route('login')->withErrors(['login' => 'Favor, fazer login.']);
+}
 
     /**
      * Show the form for editing the specified resource.

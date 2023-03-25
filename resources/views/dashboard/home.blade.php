@@ -291,7 +291,7 @@
                 <div class="col-12">
                   <div class="w-100">
                     <p class="text-sm text-secondary mb-1">Venda diaria</p>
-                    <h4 class="mb-2 font-weight-bold">R$257</h4>
+                    <h4 class="mb-2 font-weight-bold">R$ {{ $valor_diaria }}</h4>
                     <div class="d-flex align-items-center">
                     </div>
                   </div>
@@ -313,7 +313,7 @@
                 <div class="col-12">
                   <div class="w-100">
                     <p class="text-sm text-secondary mb-1">Venda Anual</p>
-                    <h4 class="mb-2 font-weight-bold">R$99,118.5</h4>
+                    <h4 class="mb-2 font-weight-bold">R$ {{$valorTotalanual}}</h4>
                     <div class="d-flex align-items-center">
                     </div>
                   </div>
@@ -334,7 +334,7 @@
                 <div class="col-12">
                   <div class="w-100">
                     <p class="text-sm text-secondary mb-1">Venda Mensal</p>
-                    <h4 class="mb-2 font-weight-bold">R$7.967</h4>
+                    <h4 class="mb-2 font-weight-bold">R$ {{$valorTotalmes}}</h4>
                     <div class="d-flex align-items-center">
                     </div>
                   </div>
@@ -355,7 +355,7 @@
                 <div class="col-12">
                   <div class="w-100">
                     <p class="text-sm text-secondary mb-1">Venda semanal</p>
-                    <h4 class="mb-2 font-weight-bold">$1.991,75</h4>
+                    <h4 class="mb-2 font-weight-bold">R$ {{ $valorTotal }}</h4>
                     <div class="d-flex align-items-center">
                     </div>
                   </div>
@@ -381,7 +381,7 @@
                 </div>
               </div>
               <div class="d-sm-flex align-items-center">
-                <h3 class="mb-0 font-weight-semibold">$87,982.80</h3>
+                <h3 class="mb-0 font-weight-semibold"></h3>
                 <span class="badge badge-sm border border-success text-success bg-success border-radius-sm ms-sm-3 px-2">
                   <svg width="9" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.46967 4.46967C0.176777 4.76256 0.176777 5.23744 0.46967 5.53033C0.762563 5.82322 1.23744 5.82322 1.53033 5.53033L0.46967 4.46967ZM5.53033 1.53033C5.82322 1.23744 5.82322 0.762563 5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967L5.53033 1.53033ZM5.53033 0.46967C5.23744 0.176777 4.76256 0.176777 4.46967 0.46967C4.17678 0.762563 4.17678 1.23744 4.46967 1.53033L5.53033 0.46967ZM8.46967 5.53033C8.76256 5.82322 9.23744 5.82322 9.53033 5.53033C9.82322 5.23744 9.82322 4.76256 9.53033 4.46967L8.46967 5.53033ZM1.53033 5.53033L5.53033 1.53033L4.46967 0.46967L0.46967 4.46967L1.53033 5.53033ZM4.46967 1.53033L8.46967 5.53033L9.53033 4.46967L5.53033 0.46967L4.46967 1.53033Z" fill="#67C23A"></path>

@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('produto_id');
             $table->unsignedBigInteger('cliente_id');
+            $table->unsignedBigInteger('status_id');
             $table->integer('quantidade');
             $table->decimal('valor_unitario', 8, 2);
             $table->decimal('valor_total', 8, 2);
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('produto_id')->references('id')->on('produtos');
-            $table->timestamps();
+            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->string('numero_pedido');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

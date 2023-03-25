@@ -15,6 +15,8 @@ class Pedido extends Model
         'quantidade',
         'valor_unitario',
         'valor_total',
+        'numero_pedido',
+        'status_id'
     ];
 
     public function cliente()
@@ -26,4 +28,9 @@ class Pedido extends Model
     {
         return $this->belongsTo(Produto::class);
     }
+
+    public function status()
+     {
+         return $this->belongsTo(Status::class);
+     }
 }

@@ -153,8 +153,8 @@ navbar-scroll="true">
                                     </div>
                                     <div class="modal-body">
                                         <p class="text-sm font-weight-normal mb-0">Estoque: {{$produto->estoques->first()->quantidade ?? 'sem valor'}}</p>
-                                        <p class="text-sm font-weight-normal mb-0">Valor Unitário: {{$produto->estoques->first()->valor_unitario ?? 'sem valor'}}</p>
-                                        <p class="text-sm font-weight-normal mb-0">Valor Total: {{$produto->estoques->first()->valor_total ?? 'sem valor'}}</p>
+                                        <p class="text-sm font-weight-normal mb-0">Valor Unitário:  <strong>R$: {{$produto->estoques->first()->valor_unitario ?? 'sem valor'}}</strong></p>
+                                        <p class="text-sm font-weight-normal mb-0">Valor Total:  <strong>R$: {{$produto->estoques->first()->valor_total ?? 'sem valor'}}</strong></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-white"

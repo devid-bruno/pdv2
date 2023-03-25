@@ -70,13 +70,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Valor Unitário</label>
-                                            <input type="number" name="valor_unitario" placeholder="Valor Unitário" class="form-control">
+                                            <input type="number" name="valor_unitario" placeholder="Valor Unitário" step="0.01" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Valor Total</label>
-                                            <input type="number" name="valor_total" placeholder="Valor Total" class="form-control">
+                                            <input type="number" name="valor_total" placeholder="Valor Total" step="0.01" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

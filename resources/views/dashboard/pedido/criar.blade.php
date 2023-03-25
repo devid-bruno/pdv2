@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label>Selecione o produto</label>
                                             <div class="input-group">
-                                                <select class="form-select" name="produto_id"">
+                                                <select class="form-select" name="produto_id">
                                                 @foreach ($produtos as $produto)
                                                     <option value="{{ $produto->id }}">
                                                         {{ $produto->nome_produto }}</option>
@@ -96,6 +96,19 @@
                                         <div class="form-group">
                                             <label>Valor Total</label>
                                             <input type="number" name="valor_total" class="form-control" step="0.01" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Status de pagamento</label>
+                                            <div class="input-group">
+                                                <select class="form-select" name="status_id">
+                                                @foreach ($status as $status)
+                                                    <option value="{{ $status->id }}">
+                                                        {{ $status->status }}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
