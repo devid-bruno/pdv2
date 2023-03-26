@@ -23,6 +23,25 @@
         <span class="font-weight-bold text-lg">Corporate UI</span>
       </a>
     </div>
+    <style>
+        .pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+    </style>
     <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
