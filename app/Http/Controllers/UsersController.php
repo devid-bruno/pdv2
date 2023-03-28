@@ -12,14 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class UsersController extends Controller
 {
-
-    public function chartData()
-{
-    $data = Pedido::select(DB::raw("DATE_FORMAT(created_at,'%m-%Y') as month"),DB::raw("SUM(valor_total) as total"))
-                ->groupBy('month')
-                ->pluck('total','month');
-    return view('teste', compact('data'));
-}
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +37,7 @@ class UsersController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect('dashboard');
         }
-        return redirect()->route('home')->withErrors(['login' => 'Credenciais inválidas.']);
+        return redirect()->route('login')->withErrors(['login' => 'Credenciais inválidas.']);
     }
 
     /**
@@ -82,6 +74,7 @@ class UsersController extends Controller
      */
     public function show()
     {
+        $pedidos = Pedido::all();
         $hoje = Carbon::today();
         $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
 
@@ -94,7 +87,7 @@ class UsersController extends Controller
         $datames = $hoje->startOfMonth();
         $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
         if(Auth::check()){
-            return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes'));
+            return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes', 'pedidos'));
         }
         return redirect()->route('login')->withErrors(['login' => 'Favor, fazer login.']);
     }

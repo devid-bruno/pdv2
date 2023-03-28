@@ -58,4 +58,4 @@ Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedido.edit')->middleware('auth');
 Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
 
-Route::get("/pdf/{id}", [InvoiceController::class, 'index']);
+Route::get("/grafico", [InvoiceController::class, 'index'])->name('graficos');

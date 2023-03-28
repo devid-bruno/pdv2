@@ -10,33 +10,35 @@ use Barryvdh\DomPDF\PDF;
 use App\Models\Pedido;
 class InvoiceController extends Controller
 {
+    public function index(){
 
+        $data = Pedido::all();
+        $valorTotal = $data->pluck('quantidade');
+        $chartData = [
+            'labels' => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            'datasets' => [
+                ['label' => "Sales",
+                'tension' => 0.4,
+                'borderWidth' => 0,
+                'borderSkipped' => false,
+                'backgroundColor' => "#2ca8ff",
+                'data' => [
+                    $valorTotal,
+                    200,
+                    100,
+                    220,
+                    500,
+                    100,
+                    400,
+                    230,
+                    500,
+                    200
+                ],
+                'maxBarThickness' => 6]
+            ]
 
-    public function index($id){
-        $pedido = Pedido::findOrFail($id);
-        $cliente = $pedido->cliente;
+        ];
 
-        $customer = new Buyer([
-            'name'          => $cliente->nome,
-            'custom_fields' => [
-                'email' => $cliente->email,
-            ],
-        ]);
-
-        $item = (new InvoiceItem())->title('Serviço de Limpeza')->pricePerUnit($pedido->valor_total);
-
-        $invoice = Invoice::make()
-            ->buyer($customer)
-            ->discountByPercent(10)
-            ->taxRate(15)
-            ->shipping(1.99)
-            ->addItem($item);
-
-        // Crie uma nova instância do PDF e renderize a view de recibo
-        $pdf = app(PDF::class);
-        $pdf->loadView('pdf', compact('invoice', 'pedido', 'cliente'));
-
-        // Retorne o PDF para o navegador
-        return $pdf->stream();
+        return view('teste', ['chartData' => json_encode($chartData)]);
     }
 }
