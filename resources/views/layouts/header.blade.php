@@ -168,7 +168,6 @@
           </li>
         </ul>
     </div>
-
   </aside>
 
 @yield('content')

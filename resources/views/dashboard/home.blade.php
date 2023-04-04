@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body px-0 py-0">`
+                            <div class="card-body px-0 py-0">
                                 <div class="table-responsive p-0">
                                     <table class="table align-items-center justify-content-center mb-0">
                                         <thead class="bg-gray-100">
