@@ -14,21 +14,11 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next, ...$roles)
+    public function handle($request, Closure $next, $role_id)
     {
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login');
+        if (Auth::check() && Auth::user()->role_id == $role_id) {
+            return $next($request);
         }
-
-        foreach ($roles as $role) {
-            $roleId = Role::where('name', $role)->first()->id; // obtém o ID da role pelo nome
-            if ($user->role_id === $roleId) { // compara o ID da role do usuário com o ID da role atual do loop
-                return $next($request);
-            }
-        }
-
-        abort(403, 'Unauthorized');
+        abort(403, 'Acesso negado.');
     }
 }
