@@ -25,19 +25,15 @@ use App\Http\Controllers\PedidoController;
 Route::get('/', [UsersController::class, 'index'])->name('login');
 Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
 
-Route::prefix('admin')->group(function () {
-    Route::get("/dashboard", [UsersController::class, 'show'])->name('users');
-});
+Route::get("/dashboard", [UsersController::class, 'show'])->name('users');
+
 
 Route::get('/register', [UsersController::class, 'create'])->name('adicionar');
 Route::post('/registro', [UsersController::class, 'store'])->name('users.register');
 Route::post('/login', [UsersController::class, 'login'])->name('login.submit');
 Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UsersController::class, 'update'])->name('users.update');
-
-
-
-
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/fornecedores', [FornecedoresController::class, 'index'])->name('fornecedor.lista')->middleware('auth');
 Route::get('/fornecedoresadd', [FornecedoresController::class, 'create'])->name('fornecedor.add')->middleware('auth');
@@ -67,4 +63,4 @@ Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.catego
 Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('auth');
 
 
-Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.funcionarios');
+Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.funcionarios')->middleware('checkRole:2');
