@@ -110,16 +110,16 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-normal mb-0">{{$pedido->valor_unitario}}</p>
+                                                    <p class="text-sm font-weight-normal mb-0">R$: {{number_format($pedido->valor_unitario, 2, ',', '.')}}</p>
                                                 </td>
                                                 <td>
-                                                    <span class="text-sm font-weight-normal">{{$pedido->quantidade}}</span>
+                                                    <span class="text-sm font-weight-normal">{{number_format($pedido->quantidade, 2, ',', '.')}}</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <div class="d-flex">
                                                     </div>
                                                     <div class="ms-2">
-                                                        <p class="text-dark text-sm mb-0">{{$pedido->valor_total}}</p>
+                                                        <p class="text-dark text-sm mb-0">R$: {{number_format($pedido->valor_total, 2, ',', '.')}}</p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -177,7 +177,7 @@
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Venda Anual</p>
-                                        <h4 class="mb-2 font-weight-bold">R$ {{ $valorTotalanual }}</h4>
+                                        <h4 class="mb-2 font-weight-bold">R$ {{ number_format($valorTotalanual, 2, ',', '.') }}</h4>
                                         <div class="d-flex align-items-center">
                                         </div>
                                     </div>
@@ -202,7 +202,7 @@
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Venda Mensal</p>
-                                        <h4 class="mb-2 font-weight-bold">R$ {{ $valorTotalmes }}</h4>
+                                        <h4 class="mb-2 font-weight-bold">R$ {{number_format($valorTotalmes, 2, ',', '.')  }}</h4>
                                         <div class="d-flex align-items-center">
                                         </div>
                                     </div>
@@ -227,7 +227,7 @@
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Venda semanal</p>
-                                        <h4 class="mb-2 font-weight-bold">R$ {{ $valorTotal }}</h4>
+                                        <h4 class="mb-2 font-weight-bold">R$ {{number_format($valorTotal, 2, ',', '.')  }}</h4>
                                         <div class="d-flex align-items-center">
                                         </div>
                                     </div>
