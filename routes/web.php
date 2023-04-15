@@ -9,6 +9,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\NotaFiscalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,5 @@ Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.catego
 Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('auth');
 
 
-Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.funcionarios')->middleware('checkRole:2');
+Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro')->middleware('checkRole:2');
+Route::get('/imprimir-nota/{id}', [FinanceiroController::class, 'imprimirNota'])->name('nota');

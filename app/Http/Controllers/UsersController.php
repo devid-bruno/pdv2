@@ -35,7 +35,12 @@ class UsersController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('users');
+            $user = Auth::user();
+            if ($user->role_id === 2) {
+                return redirect()->route('financeiro');
+            } else {
+                return redirect()->route('users');
+            }
         }
         return redirect()->route('login')->withErrors(['login' => 'Credenciais inválidas.']);
     }

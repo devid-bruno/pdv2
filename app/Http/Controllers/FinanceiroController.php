@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFinanceiroRequest;
 use App\Http\Requests\UpdateFinanceiroRequest;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+use Mike42\Escpos\Printer;
+use App\Models\Pedido;
 use App\Models\Financeiro;
 
 class FinanceiroController extends Controller
@@ -13,9 +16,37 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        //
+        return view('financeiro.index');
     }
 
+    public function imprimirNota($id)
+{
+    // Recupera a nota fiscal do banco de dados ou do sistema de arquivos
+        $notaFiscal = Pedido::find($id);
+
+        // Cria o arquivo de texto com as informações da nota fiscal
+
+        $conteudoNota = "Numero Pedido: " . $notaFiscal->numero_pedido . "\n";
+        $conteudoNota = "Cliente: " . $notaFiscal->cliente->nome . "\n";
+        $conteudoNota .= "Data da emissao: " . $notaFiscal->created_at . "\n";
+        $conteudoNota .= "Produtos:\n";
+
+        if ($notaFiscal->produto) {
+            $produto = $notaFiscal->produto;
+            $conteudoNota .= "- " . $produto->nome_produto . " - R$ " . number_format($notaFiscal->valor_unitario, 2, ',', '.') . " x " . $notaFiscal->quantidade . " = R$ " . number_format($notaFiscal->valor_total, 2, ',', '.') . "\n";
+        }
+
+        $conteudoNota .= "Total do Pedido R$ " . number_format($notaFiscal->valor_total, 2, ',', '.') . "\n";
+
+        // Conecta à impressora térmica e envia o arquivo de texto para impressão
+        $printer_ip = '192.168.1.87'; // IP da impressora
+        $connector = new NetworkPrintConnector($printer_ip, 9100); // 9100 é a porta padrão para impressoras na rede
+        $printer = new Printer($connector);
+        $printer->text($conteudoNota);
+        $printer->cut();
+        $printer->close();
+
+    }
     /**
      * Show the form for creating a new resource.
      */
