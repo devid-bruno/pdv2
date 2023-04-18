@@ -46,7 +46,7 @@ class ProdutoController extends Controller
         ]);
         $produto->save();
 
-        return redirect()->route('produto.lista');
+        return redirect()->route('estoque.add');
     }
 
     /**

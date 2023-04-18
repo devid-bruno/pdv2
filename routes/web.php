@@ -50,7 +50,9 @@ Route::post('/addproduto', [ProdutoController::class, 'store'])->name('produto.c
 Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('produto.edit');
 
 Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add');
+Route::get('/quantidade', [EstoqueController::class, 'quantidade'])->name('quantidade.add');
 Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
+Route::post('/addquantidade', [EstoqueController::class, 'adicionarQuantidade'])->name('add.quantidade');
 
 
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedido.lista');

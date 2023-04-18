@@ -130,7 +130,7 @@
                 <div class="collapse show" id="order-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('produto.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
-                    <li><a href="{{route('estoque.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
+                    <li><a href="{{route('quantidade.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
                     <li><a href="{{route('produto.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                 </ul>
                 </div>

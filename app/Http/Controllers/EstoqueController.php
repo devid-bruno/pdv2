@@ -57,6 +57,36 @@ class EstoqueController extends Controller
             $estoque->produto()->associate($produto);
         });
 
+        return redirect()->route('quantidade.add');
+    }
+
+    public function quantidade()
+    {
+        $produtos = Produto::all();
+        return view('dashboard.estoque.quantidade', compact('produtos'));
+    }
+
+    public function adicionarQuantidade(Request $request)
+    {
+        // Busca o estoque correspondente ao produto selecionado na view
+        $estoque = Estoque::where('produto_id', $request->produto_id)->first();
+
+        // Soma a quantidade atual com a quantidade informada no formulário
+        $novaQuantidade = $estoque->quantidade + $request->quantidade;
+
+        // Calcula os novos valores de unitário e total
+        $novoValorUnitario = $estoque->valor_unitario;
+        $novoValorTotal = $estoque->valor_total + ($request->quantidade * $novoValorUnitario);
+
+        // Atualiza o estoque no banco de dados com a nova quantidade, valor unitário e valor total
+        $estoque->quantidade = $novaQuantidade;
+        $estoque->valor_unitario = $novoValorUnitario;
+        $estoque->valor_total = $novoValorTotal;
+        $estoque->save();
+
+        // Retorna a mensagem de sucesso para a view
+        $mensagem = 'Quantidade adicionada com sucesso!';
+        session()->flash('alerta', $mensagem);
         return redirect()->route('produto.lista');
     }
 
@@ -82,11 +112,11 @@ class EstoqueController extends Controller
     public function update(Request $request, string $id)
     {
 
-    $estoque = Estoque::findOrFail($id);
-    $estoque->quantidade = $request->quantidade;
-    $estoque->save();
+        $estoque = Estoque::findOrFail($id);
+        $estoque->quantidade = $request->quantidade;
+        $estoque->save();
 
-    return redirect()->back()->with('success', 'Quantidade de estoque atualizada com sucesso!');
+        return redirect()->back()->with('success', 'Quantidade de estoque atualizada com sucesso!');
     }
 
     /**
