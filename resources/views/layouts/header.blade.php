@@ -96,7 +96,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand d-flex align-items-center m-0" href="{{route('users')}}">
-        <span class="font-weight-bold text-lg">Corporate UI</span>
+        <span class="font-weight-bold text-lg">Sistema</span>
       </a>
     </div>
     <div class="flex-shrink-0 p-3" style="width: 280px;">

@@ -48,6 +48,7 @@ class PedidoController extends Controller
         'produto_id' => 'required|exists:produtos,id',
         'quantidade' => 'required|integer|min:1',
         'status_id' => 'required|exists:statuses,id',
+        'forma_pagamento' => 'required|string'
     ]);
 
     $numero_pedido = rand(10000, 99999);
@@ -56,8 +57,9 @@ class PedidoController extends Controller
     $produto = Produto::findOrFail($validatedData['produto_id']);
     $status = Status::findOrFail($validatedData['status_id']);
 
-    $estoque = $produto->estoques()->firstOrFail();
+    $estoque = $produto->estoque()->firstOrFail();
     $quantidade = $validatedData['quantidade'];
+    $forma_pagamento = $validatedData['forma_pagamento'];
 
     $valor_unitario = $estoque->valor_unitario;
     $valor_total = $valor_unitario * $quantidade;
@@ -69,7 +71,8 @@ class PedidoController extends Controller
         'quantidade' => $quantidade,
         'valor_unitario' => $valor_unitario,
         'valor_total' => $valor_total,
-        'status_id' => $status->id
+        'status_id' => $status->id,
+        'forma_pagamento' => $forma_pagamento
     ]);
 
     // atualizar a quantidade em estoque do produto

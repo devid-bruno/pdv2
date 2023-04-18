@@ -16,7 +16,12 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::with('estoque')->get();
+
+        foreach ($produtos as $produto) {
+            $produto->quantidade_total = $produto->estoque->sum('quantidade');
+            $produto->valor_total = $produto->estoque->sum('valor_total');
+        }
         return view('dashboard.produto.listaproduto', compact('produtos'));
     }
 
@@ -60,17 +65,19 @@ class ProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Produto $produto)
+    public function edit($id)
     {
-        //
+        $produto = Produto::find($id);
+        $quantidade = $produto->estoque->quantidade;
+        return view('dashboard.produto.editar', compact('produto', 'quantidade'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

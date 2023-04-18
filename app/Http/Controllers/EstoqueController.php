@@ -54,7 +54,7 @@ class EstoqueController extends Controller
 
         DB::transaction(function () use ($estoque, $produto) {
             $estoque->save();
-            $estoque->estoques()->attach($produto);
+            $estoque->produto()->associate($produto);
         });
 
         return redirect()->route('produto.lista');
@@ -79,9 +79,14 @@ class EstoqueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEstoqueRequest $request, Estoque $estoque)
+    public function update(Request $request, string $id)
     {
-        //
+
+    $estoque = Estoque::findOrFail($id);
+    $estoque->quantidade = $request->quantidade;
+    $estoque->save();
+
+    return redirect()->back()->with('success', 'Quantidade de estoque atualizada com sucesso!');
     }
 
     /**

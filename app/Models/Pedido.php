@@ -16,7 +16,8 @@ class Pedido extends Model
         'valor_unitario',
         'valor_total',
         'numero_pedido',
-        'status_id'
+        'status_id',
+        'forma_pagamento'
     ];
 
     public function cliente()

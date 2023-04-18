@@ -49,32 +49,20 @@
                 <div class="pb-3 card-body">
 
 
-                    <form method="post" action="{{route('produto.criar')}}">
+                    <form method="post" action="">
                         @csrf
                         <div class="container-fluid py-4 px-5">
                             <form>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Nome Produto</label>
-                                            <input type="text" name="nome_produto" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Nome Produto">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Descrição produto</label>
-                                            <input type="text" name="descricao_produto" placeholder="Descrição produto" class="form-control">
-                                        </div>
-                                    </div><div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Marca produto</label>
-                                            <input type="text" name="marca_produto" placeholder="Marca produto" class="form-control">
+                                            <label>Quantidade</label>
+                                            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-dark">Cadastrar</button>
+                                    <button type="submit" class="btn btn-dark">Atualizar</button>
                                   </div>
                             </form>
                         </div>

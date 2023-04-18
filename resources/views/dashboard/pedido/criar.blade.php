@@ -111,6 +111,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Forma de Pagamento</label>
+                                            <input type="text" name="forma_pagamento" class="form-control" required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-dark">Cadastrar</button>

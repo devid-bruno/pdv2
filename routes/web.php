@@ -47,7 +47,7 @@ Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.cria
 Route::get('/produtos', [ProdutoController::class, 'index'])->name('produto.lista');
 Route::get('/produto', [ProdutoController::class, 'create'])->name('produto.add');
 Route::post('/addproduto', [ProdutoController::class, 'store'])->name('produto.criar');
-
+Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('produto.edit');
 
 Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add');
 Route::post('/add', [EstoqueController::class, 'store'])->name('estoque.adds');
@@ -58,6 +58,7 @@ Route::get('/pedido', [PedidoController::class, 'create'])->name('pedido.add');
 Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds');
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedido.edit')->middleware('auth');
 Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
+
 Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria.lista')->middleware('auth');
 Route::get('/categorias', [CategoriaController::class, 'create'])->name('categoria.adicionar')->middleware('auth');
 Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.categoria')->middleware('auth');

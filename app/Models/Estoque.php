@@ -11,8 +11,8 @@ class Estoque extends Model
 
     protected $fillable = ['valor_unitario', 'valor_total', 'quantidade', 'produto_id'];
 
-    public function estoques()
-     {
-         return $this->belongsToMany(Produto::class);
-     }
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class);
+    }
 }

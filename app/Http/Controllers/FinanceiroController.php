@@ -26,9 +26,17 @@ class FinanceiroController extends Controller
 
         // Cria o arquivo de texto com as informações da nota fiscal
 
+
+        $conteudoNota = "Empresa: Av Home Center " . "\n";
+        $conteudoNota = "CNPJ: 43.888.244/0001-65" . "\n";
+        $conteudoNota = "================================= " . "\n";
         $conteudoNota = "Numero Pedido: " . $notaFiscal->numero_pedido . "\n";
+        $conteudoNota = "================================= " . "\n";
         $conteudoNota = "Cliente: " . $notaFiscal->cliente->nome . "\n";
         $conteudoNota .= "Data da emissao: " . $notaFiscal->created_at . "\n";
+        $conteudoNota = "================================= " . "\n";
+        $conteudoNota .= "Forma de Pagamento: " . $notaFiscal->forma_pagamento . "\n";
+
         $conteudoNota .= "Produtos:\n";
 
         if ($notaFiscal->produto) {
@@ -37,7 +45,8 @@ class FinanceiroController extends Controller
         }
 
         $conteudoNota .= "Total do Pedido R$ " . number_format($notaFiscal->valor_total, 2, ',', '.') . "\n";
-
+        $conteudoNota = "**Este Ticket NAO eh documento fiscal!**" . "\n";
+        $conteudoNota = "        OBRIGADO E VOLTE SEMPRE" . "\n";
         // Conecta à impressora térmica e envia o arquivo de texto para impressão
         $printer_ip = '192.168.1.87'; // IP da impressora
         $connector = new NetworkPrintConnector($printer_ip, 9100); // 9100 é a porta padrão para impressoras na rede
@@ -46,6 +55,14 @@ class FinanceiroController extends Controller
         $printer->cut();
         $printer->close();
 
+            // Define uma mensagem de alerta para informar que o comprovante foi impresso com sucesso
+        $mensagem = 'Comprovante impresso com sucesso!';
+
+        // Adiciona a mensagem na sessão
+        session()->flash('alerta', $mensagem);
+
+        // Redireciona o usuário de volta à página anterior
+        return redirect()->back();
     }
     /**
      * Show the form for creating a new resource.
