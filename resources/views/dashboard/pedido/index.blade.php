@@ -1,10 +1,6 @@
 @extends('layouts.header')
 @section('content')
-@if(session('alerta'))
-    <div class="alert alert-success">
-        {{ session('alerta') }}
-    </div>
-@endif
+
 
 <body class="g-sidenav-show  bg-gray-100">
 
@@ -57,6 +53,11 @@ navbar-scroll="true">
 <div class="col-12">
 <div class="card border shadow-xs mb-4">
 <div class="card-header border-bottom pb-0">
+    @if(session('alerta'))
+    <div class="alert alert-success">
+        {{ session('alerta') }}
+    </div>
+@endif
     <div class="d-sm-flex align-items-center mb-3">
         <div>
             <h6 class="font-weight-semibold text-lg mb-0">Pedidos</h6>

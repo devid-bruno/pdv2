@@ -27,26 +27,29 @@ class FinanceiroController extends Controller
         // Cria o arquivo de texto com as informações da nota fiscal
 
 
-        $conteudoNota = "Empresa: Av Home Center " . "\n";
-        $conteudoNota = "CNPJ: 43.888.244/0001-65" . "\n";
-        $conteudoNota = "================================= " . "\n";
-        $conteudoNota = "Numero Pedido: " . $notaFiscal->numero_pedido . "\n";
-        $conteudoNota = "================================= " . "\n";
-        $conteudoNota = "Cliente: " . $notaFiscal->cliente->nome . "\n";
-        $conteudoNota .= "Data da emissao: " . $notaFiscal->created_at . "\n";
-        $conteudoNota = "================================= " . "\n";
-        $conteudoNota .= "Forma de Pagamento: " . $notaFiscal->forma_pagamento . "\n";
+        $conteudoNota =  "  BRASIL CIMENTOS LTDA" . "\n";
+        $conteudoNota .= "  CNPJ: 43.888.244/0001-65" . "\n";
+        $conteudoNota .= "  AV VAL PARAISO, 1601 - CJ PALMEIRAS 60870-440" . "\n";
+        $conteudoNota .= "  TELEFONE: (85) 9 9126-3001" . "\n". "\n". "\n";
+        $conteudoNota .= "          NUMERO PEDIDO: " . $notaFiscal->numero_pedido . "\n";
+        $conteudoNota .= "==============================================" . "\n";
+        $conteudoNota .= "Cliente: " . $notaFiscal->cliente->nome . "\n";
+        $conteudoNota .= "==============================================" . "\n";
+        $conteudoNota .= "Data da emissao: " .  now()->format('d/m/Y H:i:s') . "\n";
 
         $conteudoNota .= "Produtos:\n";
-
         if ($notaFiscal->produto) {
             $produto = $notaFiscal->produto;
-            $conteudoNota .= "- " . $produto->nome_produto . " - R$ " . number_format($notaFiscal->valor_unitario, 2, ',', '.') . " x " . $notaFiscal->quantidade . " = R$ " . number_format($notaFiscal->valor_total, 2, ',', '.') . "\n";
+            $conteudoNota .= "- " . $produto->nome_produto . " - R$ " . number_format($notaFiscal->valor_unitario, 2, ',', '.') . " x " . $notaFiscal->quantidade . "\n";
         }
-
+        $conteudoNota .= "Forma de Pagamento: " . $notaFiscal->forma_pagamento . "\n";
+        $conteudoNota .= "==============================================" . "\n";
         $conteudoNota .= "Total do Pedido R$ " . number_format($notaFiscal->valor_total, 2, ',', '.') . "\n";
-        $conteudoNota = "**Este Ticket NAO eh documento fiscal!**" . "\n";
-        $conteudoNota = "        OBRIGADO E VOLTE SEMPRE" . "\n";
+        $conteudoNota .= "==============================================" . "\n";
+        $conteudoNota .= "              VOLTE SEMPRE!" . "\n";
+        $conteudoNota .= "==============================================" . "\n";
+        $conteudoNota .= "  *Este Ticket NAO e DOCUMENTO FISCAL*" . "\n";
+
         // Conecta à impressora térmica e envia o arquivo de texto para impressão
         $printer_ip = '192.168.1.87'; // IP da impressora
         $connector = new NetworkPrintConnector($printer_ip, 9100); // 9100 é a porta padrão para impressoras na rede

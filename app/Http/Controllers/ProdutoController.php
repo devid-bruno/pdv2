@@ -17,11 +17,6 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::with('estoque')->get();
-
-        foreach ($produtos as $produto) {
-            $produto->quantidade_total = $produto->estoque->sum('quantidade');
-            $produto->valor_total = $produto->estoque->sum('valor_total');
-        }
         return view('dashboard.produto.listaproduto', compact('produtos'));
     }
 
