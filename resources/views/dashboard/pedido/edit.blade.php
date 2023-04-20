@@ -67,7 +67,15 @@
                             @endforeach
                           </select>
                         </div>
-
+                        <div class="form-group">
+                            <label>Entrega:</label>
+                            <select name="entrega_id" class="form-control" required>
+                              @foreach ($entregas as $entrega)
+                              <option value="{{ $entrega->id }}">
+                                  {{ $entrega->entrega }}</option>
+                              @endforeach
+                            </select>
+                          </div>
                         <div class="form-group">
                           <button type="submit" class="btn btn-primary">Atualizar</button>
                         </div>

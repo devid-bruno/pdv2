@@ -17,7 +17,8 @@ class Pedido extends Model
         'valor_total',
         'numero_pedido',
         'status_id',
-        'forma_pagamento'
+        'forma_pagamento',
+        'entrega_id'
     ];
 
     public function cliente()
@@ -33,5 +34,9 @@ class Pedido extends Model
     public function status()
      {
          return $this->belongsTo(Status::class);
+     }
+     public function entrega()
+     {
+         return $this->belongsTo(Entrega::class);
      }
 }

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('statuses', function (Blueprint $table) {
-            $table->dropColumn('forma_pagamento');
+        Schema::create('entregas', function (Blueprint $table) {
+            $table->id();
+            $table->string('entrega');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('statuses', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('entregas');
     }
 };

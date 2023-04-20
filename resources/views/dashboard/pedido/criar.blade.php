@@ -113,6 +113,19 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label>Status de Entrega</label>
+                                            <div class="input-group">
+                                                <select class="form-select" name="entrega_id">
+                                                @foreach ($entregas as $entrega)
+                                                    <option value="{{ $entrega->id }}">
+                                                        {{ $entrega->entrega }}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label>Forma de Pagamento</label>
                                             <input type="text" name="forma_pagamento" class="form-control" required>
                                         </div>

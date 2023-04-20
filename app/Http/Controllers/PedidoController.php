@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePedidoRequest;
-use App\Http\Requests\UpdatePedidoRequest;
 use App\Models\Pedido;
 use App\Models\Cliente;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Models\Status;
-use LaravelDaily\Invoices\Invoice;
-use LaravelDaily\Invoices\Classes\Buyer;
-use LaravelDaily\Invoices\Classes\InvoiceItem;
+use App\Models\Entrega;
 
 
 
@@ -22,8 +18,9 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::all();
-        return view('dashboard.pedido.index', compact("pedidos"));
+        $pedidos = Pedido::latest()->paginate(2);
+        $entregas = Entrega::all();
+        return view('dashboard.pedido.index', compact("pedidos", 'entregas'));
     }
 
     /**
@@ -34,7 +31,8 @@ class PedidoController extends Controller
         $produtos = Produto::all();
         $clientes = Cliente::all();
         $status = Status::all();
-        return view("dashboard.pedido.criar", compact('clientes', 'produtos', 'status'));
+        $entregas = Entrega::all();
+        return view("dashboard.pedido.criar", compact('clientes', 'produtos', 'status', 'entregas'));
     }
 
     /**
@@ -48,7 +46,8 @@ class PedidoController extends Controller
         'produto_id' => 'required|exists:produtos,id',
         'quantidade' => 'required|integer|min:1',
         'status_id' => 'required|exists:statuses,id',
-        'forma_pagamento' => 'required|string'
+        'forma_pagamento' => 'required|string',
+        'entrega_id' => 'required|string'
     ]);
 
     $numero_pedido = rand(10000, 99999);
@@ -56,6 +55,7 @@ class PedidoController extends Controller
     $cliente = Cliente::findOrFail($validatedData['cliente_id']);
     $produto = Produto::findOrFail($validatedData['produto_id']);
     $status = Status::findOrFail($validatedData['status_id']);
+    $entrega = Entrega::findOrFail($validatedData['entrega_id']);
 
     $estoque = $produto->estoque()->firstOrFail();
     $quantidade = $validatedData['quantidade'];
@@ -72,7 +72,8 @@ class PedidoController extends Controller
         'valor_unitario' => $valor_unitario,
         'valor_total' => $valor_total,
         'status_id' => $status->id,
-        'forma_pagamento' => $forma_pagamento
+        'forma_pagamento' => $forma_pagamento,
+        'entrega_id' => $entrega->id
     ]);
 
     // atualizar a quantidade em estoque do produto
@@ -99,7 +100,8 @@ class PedidoController extends Controller
     {
         $pedidos = Pedido::findOrFail($id);
         $status = Status::all();
-        return view('dashboard.pedido.edit', compact('pedidos', 'status'));
+        $entregas = Entrega::all();
+        return view('dashboard.pedido.edit', compact('pedidos', 'status', 'entregas'));
     }
 
     /**
@@ -111,6 +113,7 @@ class PedidoController extends Controller
 
     $pedido->quantidade = $request->input('quantidade');
     $pedido->status_id = $request->input('status_id');
+    $pedido->entrega_id = $request->input('entrega_id');
     $pedido->valor_total = $request->input('valor_total');
 
     $pedido->save();
@@ -125,5 +128,20 @@ class PedidoController extends Controller
     public function destroy(Pedido $pedido)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+            $pedidos = Pedido::query();
+            if ($request->has('search')) {
+                $search = $request->search;
+                $pedidos->where('numero_pedido', '=', $search)
+                    ->orWhere('forma_pagamento', 'LIKE', "%{$search}%")
+                    ->orWhereHas('cliente', function ($query) use ($search) {
+                        $query->where('nome', 'LIKE', "%{$search}%");
+                    });
+            }
+            $pedidos = $pedidos->paginate(2);
+            return view('dashboard.pedido.index', compact('pedidos'));
     }
 }

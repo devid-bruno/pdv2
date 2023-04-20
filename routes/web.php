@@ -60,7 +60,7 @@ Route::get('/pedido', [PedidoController::class, 'create'])->name('pedido.add');
 Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds');
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedido.edit')->middleware('auth');
 Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
-
+Route::post('/pedido/search', [PedidoController::class, 'search'])->name('pedido.filtro');
 Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria.lista')->middleware('auth');
 Route::get('/categorias', [CategoriaController::class, 'create'])->name('categoria.adicionar')->middleware('auth');
 Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.categoria')->middleware('auth');
