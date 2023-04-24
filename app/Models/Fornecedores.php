@@ -15,4 +15,8 @@ class Fornecedores extends Model
     {
         return $this->belongsToMany(Categoria::class);
     }
+    public function produtos()
+{
+    return $this->hasMany(Produto::class);
+}
 }

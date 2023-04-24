@@ -9,10 +9,14 @@ class Produto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome_produto', 'descricao_produto', 'marca_produto'];
+    protected $fillable = ['nome_produto', 'descricao_produto', 'marca_produto', 'fornecedor_id'];
 
     public function estoque()
 {
     return $this->hasOne(Estoque::class);
+}
+public function fornecedor()
+{
+    return $this->belongsTo(Fornecedor::class);
 }
 }

@@ -66,10 +66,22 @@
                                             <label>Descrição produto</label>
                                             <input type="text" name="descricao_produto" placeholder="Descrição produto" class="form-control">
                                         </div>
-                                    </div><div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Marca produto</label>
                                             <input type="text" name="marca_produto" placeholder="Marca produto" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Selecione o Fornecedor</label>
+                                            <select class="form-select" name="fornecedor_id" id="fornecedor_id">
+                                                @foreach ($fornecedores as $fornecedor)
+                                                    <option value="{{ $fornecedor->id }}">
+                                                        {{ $fornecedor->nome }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

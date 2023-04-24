@@ -25,7 +25,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('dashboard.produto.createproduto');
+        $fornecedores = Fornecedores::all();
+        return view('dashboard.produto.createproduto', compact('fornecedores'));
     }
 
     /**
@@ -37,13 +38,16 @@ class ProdutoController extends Controller
             'nome_produto' => 'required|string|max:255|unique:produtos,nome_produto,NULL,id',
             'descricao_produto' => 'required|string|max:255|unique:produtos,descricao_produto,NULL,id',
             'marca_produto' => 'required|string|max:255|unique:produtos,marca_produto,NULL,id',
+            'fornecedor_id' => 'required|integer|exists:fornecedores,id',
         ]);
 
         $produto = new Produto([
             'nome_produto' => $request->input('nome_produto'),
             'descricao_produto' => $request->input('descricao_produto'),
             'marca_produto' => $request->input('marca_produto'),
+            'fornecedor_id' => $request->input('fornecedor_id'),
         ]);
+
         $produto->save();
 
         return redirect()->route('estoque.add');
