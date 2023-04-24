@@ -16,9 +16,7 @@ class EstoqueController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
-        $estoques = Estoque::all();
-        return view('dashboard.estoque.estoque', compact('produtos', 'estoques'));
+
     }
 
     /**
@@ -57,7 +55,7 @@ class EstoqueController extends Controller
             $estoque->produto()->associate($produto);
         });
 
-        return redirect()->route('quantidade.add');
+        return redirect()->route('produto.lista');
     }
 
     public function quantidade()

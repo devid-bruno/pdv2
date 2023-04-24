@@ -96,6 +96,8 @@ navbar-scroll="true">
                         <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                             Descrição Produto</th>
                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                Fornecedor</th>
+                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                 ações</th>
                 </tr>
             </thead>
@@ -120,20 +122,24 @@ navbar-scroll="true">
                         </p>
                     </td>
                     <td>
+                        <p class="text-sm font-weight-normal mb-0">
+                            {{$produto->fornecedor->nome}}
+                        </p>
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                             data-bs-target="#exampleModal{{$produto->id}}">
                             <i class="fa-sharp fa-solid fa-eye"></i>
                         </button>
+                        <form id="form_{{$produto->id}}" action="{{route('produto.excluir', $produto->id)}}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este registro?');">
+                            @method('DELETE')
+                            @csrf
                             <button type="submit" class="btn btn-dark btn-icon px-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                    height="14" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                    </path>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                             </button>
-
+                        </form>
                         <div class="modal fade" id="exampleModal{{$produto->id}}" tabindex="-1"
                             role="dialog" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">

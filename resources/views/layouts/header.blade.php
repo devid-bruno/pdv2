@@ -184,6 +184,24 @@
 <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
 <script src="{{asset("js/plugins/swiper-bundle.min.js")}}" type="text/javascript"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script>
+    // Seleciona os campos de valor unitário, quantidade e valor total
+    var valorUnitario = document.querySelector('input[name="valor_unitario"]');
+    var quantidade = document.querySelector('input[name="quantidade"]');
+    var valorTotal = document.querySelector('#valor_total');
+
+    // Adiciona um evento "change" aos campos de valor unitário e quantidade
+    valorUnitario.addEventListener('change', atualizaValorTotal);
+    quantidade.addEventListener('change', atualizaValorTotal);
+
+    // Função para atualizar o valor total com base no valor unitário e quantidade
+    function atualizaValorTotal() {
+        var valorUnitarioFloat = parseFloat(valorUnitario.value);
+        var quantidadeInt = parseInt(quantidade.value);
+        var valorTotalFloat = valorUnitarioFloat * quantidadeInt;
+        valorTotal.value = valorTotalFloat.toFixed(2); // Arredonda para 2 casas decimais
+    }
+</script>
 <script src="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.js"></script>
 <script src="{{ asset('js/corporate-ui-dashboard.min.js?v=1.0.0') }}"></script>
 </body>

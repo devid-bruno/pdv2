@@ -48,6 +48,8 @@ Route::get('/produtos', [ProdutoController::class, 'index'])->name('produto.list
 Route::get('/produto', [ProdutoController::class, 'create'])->name('produto.add');
 Route::post('/addproduto', [ProdutoController::class, 'store'])->name('produto.criar');
 Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('produto.edit');
+Route::delete('/produtos/{id}/delete', [ProdutoController::class, 'destroy'])->name('produto.excluir');
+
 
 Route::get('/estoque', [EstoqueController::class, 'create'])->name('estoque.add');
 Route::get('/quantidade', [EstoqueController::class, 'quantidade'])->name('quantidade.add');

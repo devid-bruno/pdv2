@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Pedido;
+use App\Models\Estoque;
+use App\Models\Produto;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +93,8 @@ class UsersController extends Controller
 
         $datames = $hoje->startOfMonth();
         $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
+
+       
         if(Auth::check()){
             return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes', 'pedidos'));
         }

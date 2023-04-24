@@ -237,4 +237,64 @@
                     </div>
                 </div>
             </div>
+            <div class="row my-4">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="card shadow-xs border">
+                            <div class="card-header border-bottom pb-0">
+                                <div class="d-sm-flex align-items-center mb-3">
+                                    <div>
+                                        <h6 class="text-center font-weight-semibold text-lg mb-0">Remessa de Estoque</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 py-0">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center justify-content-center mb-0">
+                                        <thead class="bg-gray-100">
+                                            <tr>
+                                                <th class="text-secondary text-xs font-weight-semibold opacity-7">Produto
+                                                </th>
+                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                                    Valor por unidade</th>
+                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                                    Quantidade</th>
+                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                                    Fornecedor</th>
+                                                <th
+                                                    class="text-center text-secondary text-xs font-weight-semibold opacity-7">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($pedidos as $pedido)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2">
+                                                        <div class="my-auto">
+                                                            <h6 class="mb-0 text-sm">{{$pedido->produto->nome_produto}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-normal mb-0">R$: {{number_format($pedido->valor_unitario, 2, ',', '.')}}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="text-sm font-weight-normal">{{number_format($pedido->quantidade, 2, ',', '.')}}</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="d-flex">
+                                                    </div>
+                                                    <div class="ms-2">
+                                                        <p class="text-dark text-sm mb-0">{{}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         @endsection

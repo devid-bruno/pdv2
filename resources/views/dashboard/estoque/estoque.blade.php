@@ -1,6 +1,8 @@
 @extends('layouts.header')
 @section('content')
 
+
+
     <body class="g-sidenav-show  bg-gray-100">
 
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -52,46 +54,45 @@
                     <form method="post" action="{{route('estoque.adds')}}">
                         @csrf
                         <div class="container-fluid py-4 px-5">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Selecione o Produto</label>
-                                            <div class="input-group">
-                                                <select class="form-select" name="produto_id">
-                                                    @foreach ($produtos as $produto)
-                                                        <option value="{{ $produto->id }}">
-                                                            {{ $produto->nome_produto }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Valor Unitário</label>
-                                            <input type="number" name="valor_unitario" placeholder="Valor Unitário" step="0.01" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Valor Total</label>
-                                            <input type="number" name="valor_total" placeholder="Valor Total" step="0.01" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Quantidade</label>
-                                            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Selecione o Produto</label>
+                                        <div class="input-group">
+                                            <select class="form-select" name="produto_id">
+                                                @foreach ($produtos as $produto)
+                                                    <option value="{{ $produto->id }}">
+                                                        {{ $produto->nome_produto }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-dark">Cadastrar</button>
-                                  </div>
-                            </form>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Valor Unitário</label>
+                                        <input type="number" name="valor_unitario" placeholder="Valor Unitário" step="0.01" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Quantidade</label>
+                                        <input type="number" name="quantidade" placeholder="Quantidade" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Valor Total</label>
+                                        <input type="number" id="valor_total" name="valor_total" placeholder="Valor Total" step="0.01" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark">Cadastrar</button>
+                            </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         @endsection
