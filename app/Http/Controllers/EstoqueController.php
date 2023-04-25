@@ -76,15 +76,19 @@ class EstoqueController extends Controller
         $novoValorUnitario = $estoque->valor_unitario;
         $novoValorTotal = $estoque->valor_total + ($request->quantidade * $novoValorUnitario);
 
+         // Incrementa a quantidade de remessas
+        $novaRemessa = $estoque->remessas + 1;
+
         // Atualiza o estoque no banco de dados com a nova quantidade, valor unitário e valor total
         $estoque->quantidade = $novaQuantidade;
         $estoque->valor_unitario = $novoValorUnitario;
         $estoque->valor_total = $novoValorTotal;
+        $estoque->remessas = $novaRemessa;
         $estoque->save();
 
         // Retorna a mensagem de sucesso para a view
-        $mensagem = 'Quantidade adicionada com sucesso!';
-        session()->flash('alerta', $mensagem);
+        $mensagem = 'Estoque adicionada com sucesso!';
+        session()->flash('atualiza', $mensagem);
         return redirect()->route('produto.lista');
     }
 

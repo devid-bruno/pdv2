@@ -47,9 +47,9 @@
             </nav>
             <div class="container-fluid py-4 px-5">
                 <div class="pb-3 card-body">
+                   
 
-
-                    <form method="post" action="{{route('add.quantidade')}}">
+                    <form method="post" action="{{ route('add.quantidade') }}">
                         @csrf
                         <div class="container-fluid py-4 px-5">
                             <form>
@@ -70,13 +70,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Quantidade</label>
-                                            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control">
+                                            <input type="number" name="quantidade" placeholder="Quantidade"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-dark">Cadastrar</button>
-                                  </div>
+                                </div>
                             </form>
                         </div>
                     </form>

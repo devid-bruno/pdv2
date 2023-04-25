@@ -94,7 +94,7 @@ class UsersController extends Controller
         $datames = $hoje->startOfMonth();
         $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
 
-       
+
         if(Auth::check()){
             return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes', 'pedidos'));
         }

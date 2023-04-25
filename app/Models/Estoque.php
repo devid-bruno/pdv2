@@ -9,7 +9,7 @@ class Estoque extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['valor_unitario', 'valor_total', 'quantidade', 'produto_id'];
+    protected $fillable = ['valor_unitario', 'valor_total', 'quantidade', 'produto_id', 'remessas'];
 
     public function produto()
     {

@@ -255,9 +255,9 @@
                                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">Produto
                                                 </th>
                                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Valor por unidade</th>
+                                                    Valor Total</th>
                                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Quantidade</th>
+                                                    Quantidade de Nova Remessa</th>
                                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                                     Fornecedor</th>
                                                 <th
@@ -276,16 +276,16 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-normal mb-0">R$: {{number_format($pedido->valor_unitario, 2, ',', '.')}}</p>
+                                                    <p class="text-sm font-weight-normal mb-0">{{$pedido->produto->estoque->valor_total}}</p>
                                                 </td>
                                                 <td>
-                                                    <span class="text-sm font-weight-normal">{{number_format($pedido->quantidade, 2, ',', '.')}}</span>
+                                                    <span class="text-sm font-weight-normal">{{$pedido->produto->estoque->remessas}}</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <div class="d-flex">
                                                     </div>
                                                     <div class="ms-2">
-                                                        <p class="text-dark text-sm mb-0">{{}}</p>
+                                                        <p class="text-dark text-sm mb-0">{{$pedido->produto->fornecedor->nome}}</p>
                                                     </div>
                                                 </div>
                                             </td>
