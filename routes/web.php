@@ -71,3 +71,5 @@ Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name(
 
 Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro')->middleware('checkRole:2');
 Route::get('/imprimir-nota/{id}', [FinanceiroController::class, 'imprimirNota'])->name('nota');
+Route::get('/relatorio', [FinanceiroController::class, 'gerarRelatório'])->name('gera.relatorio');
+Route::get('/relatorioremessa', [FinanceiroController::class, 'RelatórioRemessas'])->name('gera.relatorioremessa');

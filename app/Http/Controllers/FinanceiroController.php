@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFinanceiroRequest;
 use App\Http\Requests\UpdateFinanceiroRequest;
+use App\Models\Estoque;
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
 use Endroid\QrCode\Label\Label;
@@ -11,11 +12,15 @@ use Endroid\QrCode\Logo\Logo;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\Printer;
 use App\Models\Pedido;
+use App\Models\User;
 use App\Models\Financeiro;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 class FinanceiroController extends Controller
 {
@@ -83,6 +88,72 @@ class FinanceiroController extends Controller
 
         // Redireciona o usuário de volta à página anterior
         return redirect()->back();
+    }
+
+    public function gerarRelatório(){
+        // Cria um novo objeto Spreadsheet
+    $spreadsheet = new Spreadsheet();
+
+    // Adiciona um cabeçalho para a planilha
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'Cliente');
+    $sheet->setCellValue('B1', 'Produto');
+    $sheet->setCellValue('C1', 'Valor da venda');
+    $sheet->setCellValue('D1', 'Quantidade');
+
+    // Busca todas as vendas no banco de dados
+    $pedidos = Pedido::all();
+
+    // Adiciona uma linha para cada venda
+    $linha = 2;
+    foreach ($pedidos as $pedido) {
+        $sheet->setCellValue('A'.$linha, $pedido->cliente->nome);
+        $sheet->setCellValue('B'.$linha, $pedido->produto->nome_produto);
+        $sheet->setCellValue('C'.$linha, $pedido->valor_total);
+        $sheet->setCellValue('D'.$linha, $pedido->quantidade);
+        $linha++;
+    }
+
+    // Cria um novo objeto Xlsx Writer e salva a planilha em um arquivo
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'relatorio_vendas.xlsx';
+    $writer->save($filename);
+
+    // Retorna o arquivo para download
+    return response()->download($filename);
+    }
+
+    public function RelatórioRemessas(){
+        // Cria um novo objeto Spreadsheet
+    $spreadsheet = new Spreadsheet();
+
+    // Adiciona um cabeçalho para a planilha
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'Produto');
+    $sheet->setCellValue('B1', 'Valor das Compras');
+    $sheet->setCellValue('C1', 'Remessas');
+    $sheet->setCellValue('D1', 'Fornecedor');
+
+    // Busca todas as vendas no banco de dados
+    $estoques = Estoque::all();
+
+    // Adiciona uma linha para cada venda
+    $linha = 2;
+    foreach ($estoques as $estoque) {
+        $sheet->setCellValue('A'.$linha, $estoque->produto->nome_produto);
+        $sheet->setCellValue('B'.$linha, $estoque->valor_total);
+        $sheet->setCellValue('C'.$linha, $estoque->remessas);
+        $sheet->setCellValue('D'.$linha, $estoque->produto->fornecedor->nome);
+        $linha++;
+    }
+
+    // Cria um novo objeto Xlsx Writer e salva a planilha em um arquivo
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'relatorio_estoque.xlsx';
+    $writer->save($filename);
+
+    // Retorna o arquivo para download
+    return response()->download($filename);
     }
     /**
      * Show the form for creating a new resource.
