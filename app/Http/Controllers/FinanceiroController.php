@@ -5,22 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFinanceiroRequest;
 use App\Http\Requests\UpdateFinanceiroRequest;
 use App\Models\Estoque;
-use Endroid\QrCode\Color\Color;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
-use Endroid\QrCode\Label\Label;
-use Endroid\QrCode\Logo\Logo;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\Printer;
 use App\Models\Pedido;
-use App\Models\User;
 use App\Models\Financeiro;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\Writer\PngWriter;
+use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class FinanceiroController extends Controller
 {
@@ -70,7 +62,6 @@ class FinanceiroController extends Controller
         $conteudoNota .= "==============================================" . "\n";
         $conteudoNota .= "  *Este Ticket NAO e DOCUMENTO FISCAL*" . "\n";
         $conteudoNota .= "==============================================" . "\n";
-        // Conecta à impressora térmica e envia o arquivo de texto para impressão
         $printer_ip = '192.168.1.87'; // IP da impressora
         $connector = new NetworkPrintConnector($printer_ip, 9100); // 9100 é a porta padrão para impressoras na rede
         $printer = new Printer($connector);
@@ -78,56 +69,74 @@ class FinanceiroController extends Controller
         $printer->cut();
         $printer->close();
 
-
-
-        // Define uma mensagem de alerta para informar que o comprovante foi impresso com sucesso
         $mensagem = 'Comprovante impresso com sucesso!';
-
-        // Adiciona a mensagem na sessão
         session()->flash('alerta', $mensagem);
-
-        // Redireciona o usuário de volta à página anterior
         return redirect()->back();
     }
 
     public function gerarRelatório(){
-        // Cria um novo objeto Spreadsheet
     $spreadsheet = new Spreadsheet();
 
-    // Adiciona um cabeçalho para a planilha
+    $aba2 = $spreadsheet->createSheet();
+    $aba2->setTitle('Ganhos');
+
+
+    $aba2->setCellValue('A1', 'Diaria');
+    $aba2->setCellValue('B1', 'Semanal');
+    $aba2->setCellValue('C1', 'Mensal');
+    $aba2->setCellValue('D1', 'MÊS REFERÊNCIA');
+
+    $hoje = Carbon::today();
+    $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
+
+    $dataInicioSemana = $hoje->startOfWeek();
+    $valorTotal = Pedido::where('created_at', '>=', $dataInicioSemana)->where('status_id', 1)->sum('valor_total');
+
+    $datames = $hoje->startOfMonth();
+    $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
+
+    $data = Pedido::latest()->value('created_at');
+    
+    $linha = 2;
+        $aba2->setCellValue('A'.$linha, $valor_diaria);
+        $aba2->setCellValue('B'.$linha, $valorTotal);
+        $aba2->setCellValue('C'.$linha, $valorTotalmes);
+        $aba2->setCellValue('D'.$linha, $data->format('m'));
+        $linha++;
+
+
+
+
     $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setTitle('Vendas');
     $sheet->setCellValue('A1', 'Cliente');
     $sheet->setCellValue('B1', 'Produto');
     $sheet->setCellValue('C1', 'Valor da venda');
     $sheet->setCellValue('D1', 'Quantidade');
-
-    // Busca todas as vendas no banco de dados
+    $sheet->setCellValue('E1', 'Pagamentos');
+    $sheet->setCellValue('F1', 'Data');
     $pedidos = Pedido::all();
-
-    // Adiciona uma linha para cada venda
     $linha = 2;
     foreach ($pedidos as $pedido) {
         $sheet->setCellValue('A'.$linha, $pedido->cliente->nome);
         $sheet->setCellValue('B'.$linha, $pedido->produto->nome_produto);
         $sheet->setCellValue('C'.$linha, $pedido->valor_total);
         $sheet->setCellValue('D'.$linha, $pedido->quantidade);
+        $sheet->setCellValue('E'.$linha, $pedido->forma_pagamento);
+        $sheet->setCellValue('F'.$linha, $pedido->created_at->format('d/m/Y'));
         $linha++;
     }
 
-    // Cria um novo objeto Xlsx Writer e salva a planilha em um arquivo
     $writer = new Xlsx($spreadsheet);
     $filename = 'relatorio_vendas.xlsx';
     $writer->save($filename);
 
-    // Retorna o arquivo para download
     return response()->download($filename);
     }
 
     public function RelatórioRemessas(){
-        // Cria um novo objeto Spreadsheet
     $spreadsheet = new Spreadsheet();
 
-    // Adiciona um cabeçalho para a planilha
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setCellValue('A1', 'Produto');
     $sheet->setCellValue('B1', 'Valor das Compras');

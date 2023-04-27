@@ -81,7 +81,7 @@ class UsersController extends Controller
      */
     public function show()
     {
-        $pedidos = Pedido::all();
+        $pedidos = Pedido::latest()->paginate(2);
         $hoje = Carbon::today();
         $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
 

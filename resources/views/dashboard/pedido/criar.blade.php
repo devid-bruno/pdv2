@@ -95,7 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Valor Total</label>
-                                            <input type="number" name="valor_total" class="form-control" step="0.01" required>
+                                            <input type="number" id="valor_total" name="valor_total" class="form-control" step="0.01" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

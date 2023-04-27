@@ -47,7 +47,8 @@ class PedidoController extends Controller
         'quantidade' => 'required|integer|min:1',
         'status_id' => 'required|exists:statuses,id',
         'forma_pagamento' => 'required|string',
-        'entrega_id' => 'required|string'
+        'entrega_id' => 'required|string',
+        'valor_unitario' => 'required'
     ]);
 
     $numero_pedido = rand(10000, 99999);
@@ -61,7 +62,7 @@ class PedidoController extends Controller
     $quantidade = $validatedData['quantidade'];
     $forma_pagamento = $validatedData['forma_pagamento'];
 
-    $valor_unitario = $estoque->valor_unitario;
+    $valor_unitario = $validatedData['valor_unitario'];
     $valor_total = $valor_unitario * $quantidade;
 
     $pedido = Pedido::create([
