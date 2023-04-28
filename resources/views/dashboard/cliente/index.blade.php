@@ -195,13 +195,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="border-top py-3 px-3 d-flex align-items-center">
-                        <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
-                        <div class="ms-auto">
-                            <button class="btn btn-sm btn-white mb-0">Previous</button>
-                            <button class="btn btn-sm btn-white mb-0">Next</button>
-                        </div>
-                    </div>
+                   {{$clientes->links()}}
                 </div>
             </div>
             </div>

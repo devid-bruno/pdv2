@@ -19,7 +19,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::select('id', 'nome')->withCount('pedidos')->orderBy('nome')->get();
+        $clientes = Cliente::select('id', 'nome')->withCount('pedidos')->orderBy('nome')->paginate(2);
 
         return view('dashboard.cliente.index', compact('clientes'));
     }

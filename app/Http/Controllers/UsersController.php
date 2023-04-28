@@ -28,7 +28,7 @@ class UsersController extends Controller
     public function create()
     {
         $roles = Role::all();
-        $users = User::all();
+        $users = User::first()->paginate(2);
         return view('dashboard.users', compact('roles', 'users'));
     }
 
