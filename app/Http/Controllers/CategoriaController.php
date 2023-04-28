@@ -13,7 +13,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::first()->paginate(2);
         return view('dashboard.categoria.categoria', compact('categorias'));
     }
 
@@ -70,8 +70,11 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Categoria $categoria, string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        $categoria->delete();
+        return redirect()->route('categoria.lista');
     }
 }

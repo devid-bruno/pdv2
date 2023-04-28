@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-
+use DateTime;
 class FinanceiroController extends Controller
 {
     /**
@@ -96,7 +96,7 @@ class FinanceiroController extends Controller
     $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
 
     $data = Pedido::latest()->value('created_at');
-    
+
     $linha = 2;
         $aba2->setCellValue('A'.$linha, $valor_diaria);
         $aba2->setCellValue('B'.$linha, $valorTotal);
@@ -114,7 +114,7 @@ class FinanceiroController extends Controller
     $sheet->setCellValue('C1', 'Valor da venda');
     $sheet->setCellValue('D1', 'Quantidade');
     $sheet->setCellValue('E1', 'Pagamentos');
-    $sheet->setCellValue('F1', 'Data');
+    $sheet->setCellValue('F1', 'Data Venda');
     $pedidos = Pedido::all();
     $linha = 2;
     foreach ($pedidos as $pedido) {
@@ -123,7 +123,7 @@ class FinanceiroController extends Controller
         $sheet->setCellValue('C'.$linha, $pedido->valor_total);
         $sheet->setCellValue('D'.$linha, $pedido->quantidade);
         $sheet->setCellValue('E'.$linha, $pedido->forma_pagamento);
-        $sheet->setCellValue('F'.$linha, $pedido->created_at->format('d/m/Y'));
+        $sheet->setCellValue('F'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') );
         $linha++;
     }
 

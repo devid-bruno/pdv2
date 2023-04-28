@@ -39,6 +39,7 @@ Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.d
 Route::get('/fornecedores', [FornecedoresController::class, 'index'])->name('fornecedor.lista')->middleware('auth');
 Route::get('/fornecedoresadd', [FornecedoresController::class, 'create'])->name('fornecedor.add')->middleware('auth');
 Route::post('/criarfornecedores', [FornecedoresController::class, 'store'])->name('fornecedor.criar')->middleware('auth');
+Route::delete('/fornecedor/{id}/delete', [FornecedoresController::class, 'destroy'])->name('fornecedor.exclui')->middleware('auth');
 
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
 Route::get('/lista', [ClienteController::class, 'create'])->name('clientes.lista');
@@ -63,10 +64,11 @@ Route::post('/addpedido', [PedidoController::class, 'store'])->name('pedido.adds
 Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedido.edit')->middleware('auth');
 Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
 Route::post('/pedido/search', [PedidoController::class, 'search'])->name('pedido.filtro');
+
 Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria.lista')->middleware('auth');
 Route::get('/categorias', [CategoriaController::class, 'create'])->name('categoria.adicionar')->middleware('auth');
 Route::post('/criar', [CategoriaController::class, 'store'])->name('criar.categoria')->middleware('auth');
-Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('auth');
+Route::delete('/categoria/{id}/delete', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('auth');
 
 
 Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro')->middleware('checkRole:2');

@@ -16,7 +16,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::with('estoque')->get();
+        $produtos = Produto::latest()->paginate(2);
         return view('dashboard.produto.listaproduto', compact('produtos'));
     }
 

@@ -114,6 +114,10 @@
                                                         data-bs-target="#exampleModal{{$fornecedor->id}}">
                                                         <i class="fa-sharp fa-solid fa-eye"></i>
                                                     </button>
+                                                    <form id="form_{{ $fornecedor->id }}"
+                                                        action="{{ route('fornecedor.exclui', $fornecedor->id) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este fornecedor?');">
+                                                        @method('DELETE')
+                                                        @csrf
                                                         <button type="submit" class="btn btn-dark btn-icon px-3">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                                 height="14" fill="none" viewBox="0 0 24 24"
@@ -123,7 +127,7 @@
                                                                 </path>
                                                             </svg>
                                                         </button>
-
+                                                    </form>
                                                     <div class="modal fade" id="exampleModal{{$fornecedor->id}}" tabindex="-1"
                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
@@ -157,31 +161,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="border-top py-3 px-3 d-flex align-items-center">
-                                    <button class="btn btn-sm btn-white d-sm-block d-none mb-0">Previous</button>
-                                    <nav aria-label="..." class="ms-auto">
-                                        <ul class="pagination pagination-light mb-0">
-                                            <li class="page-item active" aria-current="page">
-                                                <span class="page-link font-weight-bold">1</span>
-                                            </li>
-                                            <li class="page-item"><a class="page-link border-0 font-weight-bold"
-                                                    href="javascript:;">2</a></li>
-                                            <li class="page-item"><a
-                                                    class="page-link border-0 font-weight-bold d-sm-inline-flex d-none"
-                                                    href="javascript:;">3</a></li>
-                                            <li class="page-item"><a class="page-link border-0 font-weight-bold"
-                                                    href="javascript:;">...</a></li>
-                                            <li class="page-item"><a
-                                                    class="page-link border-0 font-weight-bold d-sm-inline-flex d-none"
-                                                    href="javascript:;">8</a></li>
-                                            <li class="page-item"><a class="page-link border-0 font-weight-bold"
-                                                    href="javascript:;">9</a></li>
-                                            <li class="page-item"><a class="page-link border-0 font-weight-bold"
-                                                    href="javascript:;">10</a></li>
-                                        </ul>
-                                    </nav>
-                                    <button class="btn btn-sm btn-white d-sm-block d-none mb-0 ms-auto">Next</button>
-                                </div>
+                                {{$fornecedores->links()}}
                             </div>
                         </div>
                     </div>

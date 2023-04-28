@@ -81,7 +81,7 @@ class UsersController extends Controller
      */
     public function show()
     {
-        $pedidos = Pedido::latest()->paginate(2);
+        $pedidos = Pedido::latest()->paginate(4);
         $hoje = Carbon::today();
         $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
 
@@ -93,7 +93,6 @@ class UsersController extends Controller
 
         $datames = $hoje->startOfMonth();
         $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
-
 
         if(Auth::check()){
             return view('dashboard.home', compact('valor_diaria', 'valorTotal', 'valorTotalanual', 'valorTotalmes', 'pedidos'));

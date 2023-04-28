@@ -130,6 +130,12 @@
                                             <input type="text" name="forma_pagamento" class="form-control" required>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Data Venda</label>
+                                            <input type="date" name="data_venda" class="form-control" required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-dark">Cadastrar</button>

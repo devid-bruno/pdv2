@@ -39,9 +39,9 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255|unique:clientes,nome,NULL,id',
-            'cpf' => 'required|string|max:255|unique:clientes,cpf,NULL,id',
+            'cpf' => 'required|string',
             'endereco' => 'required|string|max:255|unique:clientes,endereco,NULL,id',
-            'telefone' => 'required|string|max:255|unique:clientes,telefone,NULL,id'
+            'telefone' => 'required|string'
         ]);
 
         $cliente = new Cliente([

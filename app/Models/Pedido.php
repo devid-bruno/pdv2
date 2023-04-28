@@ -18,7 +18,8 @@ class Pedido extends Model
         'numero_pedido',
         'status_id',
         'forma_pagamento',
-        'entrega_id'
+        'entrega_id',
+        'data_venda'
     ];
 
     public function cliente()

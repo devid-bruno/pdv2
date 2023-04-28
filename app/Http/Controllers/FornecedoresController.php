@@ -15,7 +15,7 @@ class FornecedoresController extends Controller
      */
     public function index()
     {
-        $fornecedores = Fornecedores::all();
+        $fornecedores = Fornecedores::first()->paginate(2);
         $categorias = Categoria::all();
         return view('dashboard.fornecedor.fornecedor', compact('fornecedores', 'categorias'));
     }
@@ -98,8 +98,14 @@ class FornecedoresController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fornecedores $fornecedores)
+    public function destroy(Fornecedores $fornecedores, string $id)
     {
-        //
+        $fornecedores = Fornecedores::find($id);
+        // remover referências na tabela categoria_fornecedores
+        DB::table('categoria_fornecedores')->where('fornecedores_id', $id)->delete();
+
+        // excluir o fornecedor
+        $fornecedores->delete();
+        return redirect()->route('fornecedor.lista');
     }
 }

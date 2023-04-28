@@ -48,7 +48,8 @@ class PedidoController extends Controller
         'status_id' => 'required|exists:statuses,id',
         'forma_pagamento' => 'required|string',
         'entrega_id' => 'required|string',
-        'valor_unitario' => 'required'
+        'valor_unitario' => 'required',
+        'data_venda' => 'required'
     ]);
 
     $numero_pedido = rand(10000, 99999);
@@ -62,6 +63,8 @@ class PedidoController extends Controller
     $quantidade = $validatedData['quantidade'];
     $forma_pagamento = $validatedData['forma_pagamento'];
 
+    $data_venda = $validatedData['data_venda'];
+
     $valor_unitario = $validatedData['valor_unitario'];
     $valor_total = $valor_unitario * $quantidade;
 
@@ -74,7 +77,8 @@ class PedidoController extends Controller
         'valor_total' => $valor_total,
         'status_id' => $status->id,
         'forma_pagamento' => $forma_pagamento,
-        'entrega_id' => $entrega->id
+        'entrega_id' => $entrega->id,
+        'data_venda' => $data_venda
     ]);
 
     // atualizar a quantidade em estoque do produto

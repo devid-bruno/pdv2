@@ -156,7 +156,7 @@
                                                 <td>
                                                     <div class="d-flex px-2">
                                                         <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{$pedido->created_at->format('d/m/Y H:i')}}</h6>
+                                                            <h6 class="mb-0 text-sm">{{ \DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') }}</h6>
                                                         </div>
                                                     </div>
                                                 </td>
