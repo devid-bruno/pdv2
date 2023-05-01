@@ -129,7 +129,7 @@
                                                     </td>
                                                     <td>
                                                         <p class="text-sm font-weight-normal mb-0">
-                                                            {{ $produto->fornecedor->nome }}
+                                                            {{ $produto->fornecedor->nome ?? '' }}
                                                         </p>
                                                     </td>
                                                     <td>

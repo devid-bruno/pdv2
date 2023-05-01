@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('financeiros', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('diaria', 8, 2);
-            $table->decimal('semanal', 8, 2);
-            $table->decimal('mensal', 8, 2);
-            $table->decimal('anual', 8, 2);
-            $table->timestamps();
+        Schema::table('financeiros', function (Blueprint $table) {
+            $table->date('data')->after('anual');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('financeiros');
+        Schema::table('financeiros', function (Blueprint $table) {
+            //
+        });
     }
 };

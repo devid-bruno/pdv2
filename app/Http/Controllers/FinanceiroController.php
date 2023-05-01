@@ -164,9 +164,12 @@ class FinanceiroController extends Controller
     // Retorna o arquivo para download
     return response()->download($filename);
     }
+
     /**
      * Show the form for creating a new resource.
      */
+
+     
     public function create()
     {
         //

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Financeiro extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['diaria', 'semanal', 'mensal', 'anual', 'data'];
 }

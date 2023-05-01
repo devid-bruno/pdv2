@@ -72,107 +72,103 @@
                     </div>
                 </div>
                 <div class="row my-4">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="card shadow-xs border">
-                            <div class="card-header border-bottom pb-0">
-                                <div class="d-sm-flex align-items-center mb-3">
-                                    <div>
-                                        <h6 class="text-center font-weight-semibold text-lg mb-0">Vendas</h6>
-                                    </div>
-                                    <div class="ms-auto d-flex">
-                                        <a href="{{route('gera.relatorio')}}"><button type="button"
-                                            class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 me-2">
-                                             <span class="btn-inner--icon">
-                                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" class="d-block me-2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                                </svg>
-                                            </span>
-                                            <span class="btn-inner--text">Relatório</span>
-                                        </button></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body px-0 py-0">
-                                <div class="table-responsive p-0">
-                                    <table class="table align-items-center justify-content-center mb-0">
-                                        <thead class="bg-gray-100">
-                                            <tr>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7">Produto
-                                                </th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Valor por unidade</th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Quantidade</th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Valor total vendido</th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Forma de Pagamento</th>
-                                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
-                                                    Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($pedidos as $pedido)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{$pedido->produto->nome_produto}}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
 
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">R$: {{number_format($pedido->valor_unitario, 2, ',', '.')}}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{$pedido->quantidade}}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">R$: {{number_format($pedido->valor_total, 2, ',', '.')}}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{$pedido->forma_pagamento}}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{ \DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                <div class="col-lg-8 col-md-6">
+                  <div class="card shadow-xs border">
+                    <div class="card-header border-bottom pb-0">
+                      <div class="d-sm-flex align-items-center mb-3">
+                        <div>
+                          <h6 class="font-weight-semibold text-lg mb-0">Vendas Recentes</h6>
+                        </div>
+                        <div class="ms-auto d-flex">
+                            <div class="ms-auto d-flex">
+                                <a href="{{route('gera.relatorio')}}"><button type="button"
+                                    class="btn btn-sm btn-dark btn-icon d-flex align-items-center mb-0 me-2">
+                                     <span class="btn-inner--icon">
+                                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" class="d-block me-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                        </svg>
+                                    </span>
+                                    <span class="btn-inner--text">Relatório</span>
+                                </button></a>
                             </div>
                         </div>
-                        <div class="py-4">
-                            {!! $pedidos->links() !!}
-                        </div>
+                      </div>
                     </div>
+                    <div class="card-body px-0 py-0">
+                      <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                          <thead class="bg-gray-100">
+                            <tr>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7">Produto</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Cliente</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Quantidade</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Valor Total Vendido</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Forma Do Pagamento</th>
+                              <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Data Venda</th>
+                              <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($pedidos as $pedido)
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">{{$pedido->produto->nome_produto}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">{{$pedido->cliente->nome}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">{{$pedido->quantidade}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">R$: {{number_format($pedido->valor_total, 2, ',', '.')}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">{{$pedido->forma_pagamento}}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">{{ \DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="py-4">
+                        {!! $pedidos->links() !!}
+                    </div>
+                  </div>
                 </div>
-            </div>
-
+              </div>
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0">
                     <div class="card border shadow-xs mb-4">
@@ -279,4 +275,5 @@
                 </div>
             </div>
             </div>
+
         @endsection

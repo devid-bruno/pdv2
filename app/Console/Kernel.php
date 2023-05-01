@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Jobs\FinanceiroJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,7 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $dados = ['valor' => 100, 'tipo' => 'entrada'];
+        $schedule->job(new FinanceiroJob($dados))->everyMinute();
     }
 
     /**
