@@ -60,17 +60,36 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+
+        return view('dashboard.cliente.edit', compact('cliente'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'nome' => 'required|max:255',
+            'cpf' => 'required',
+            'endereco' => 'required',
+            'telefone' => 'required',
+        ]);
+
+        $cliente->nome = $validatedData['nome'];
+        $cliente->cpf = $validatedData['cpf'];
+        $cliente->endereco = $validatedData['endereco'];
+        $cliente->telefone = $validatedData['telefone'];
+
+        $cliente->save();
+        $mensagem = 'Cliente atualizado com sucesso!';
+        session()->flash('atualiza', $mensagem);
+         return redirect()->route('clientes');
     }
 
     /**

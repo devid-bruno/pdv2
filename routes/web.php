@@ -43,6 +43,8 @@ Route::delete('/fornecedor/{id}/delete', [FornecedoresController::class, 'destro
 
 Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
 Route::get('/lista', [ClienteController::class, 'create'])->name('clientes.lista');
+Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('cliente.edit');
+Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('cliente.update');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.criar');
 
 Route::get('/produtos', [ProdutoController::class, 'index'])->name('produto.lista');
