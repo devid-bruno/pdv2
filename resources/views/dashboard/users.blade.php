@@ -31,13 +31,7 @@
                                         <img src="{{ asset('img/team-2.jpg') }}" class="avatar avatar-sm" alt="avatar" />
                                     </a>
                                     <ul class="dropdown-menu text-small">
-                                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -92,8 +86,8 @@
                                             <div class="p-0 modal-body">
                                                 <div class="card card-plain">
                                                     <div class="pb-0 text-left card-header">
-                                                        <h3 class="font-weight-bolder text-dark">Sign up</h3>
-                                                        <p class="mb-0">Enter your email and password to register</p>
+                                                        <h3 class="font-weight-bolder text-dark">Cadastro</h3>
+                                                        <p class="mb-0">Cadastro de usuário</p>
                                                     </div>
                                                     <div class="pb-3 card-body">
                                                         <form method="post" action="{{route('users.register')}}">
@@ -141,10 +135,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="card-body px-0 py-0">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
@@ -155,7 +147,6 @@
                                     </th>
                                     <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                         Email</th>
-
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
@@ -168,7 +159,6 @@
                                                     <h6 class="mb-0 text-sm font-weight-semibold">{{ $user->name }}</h6>
                                                     <p class="text-sm text-secondary mb-0"></p>
                                                 </div>
-
                                             </div>
                                         </td>
                                         <td>
@@ -181,8 +171,6 @@
                                             <p class="text-sm text-secondary mb-0">{{ $user->email }}</p>
                                         </td>
                                         <td class="align-middle">
-
-
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a href="{{ route('users.edit', $user->id) }}">
                                                     <button type="button" class="btn btn-dark btn-icon px-3">
@@ -209,8 +197,6 @@
                                                     </button>
                                                 </form>
                                             </div>
-
-
                                         </td>
                                     </tr>
                                 @endforeach

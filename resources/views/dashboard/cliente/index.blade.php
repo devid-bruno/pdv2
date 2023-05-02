@@ -31,13 +31,7 @@
                                         <img src="{{ asset('img/team-2.jpg') }}" class="avatar avatar-sm" alt="avatar" />
                                     </a>
                                     <ul class="dropdown-menu text-small">
-                                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -92,8 +86,8 @@
                                             <div class="p-0 modal-body">
                                                 <div class="card card-plain">
                                                     <div class="pb-0 text-left card-header">
-                                                        <h3 class="font-weight-bolder text-dark">Sign up</h3>
-                                                        <p class="mb-0">Enter your email and password to register</p>
+                                                        <h3 class="font-weight-bolder text-dark">Cadastro</h3>
+                                                        <p class="mb-0">Cadastro de usuário</p>
                                                     </div>
                                                     <div class="pb-3 card-body">
                                                         <form method="post" action="{{ route('cliente.criar') }}">

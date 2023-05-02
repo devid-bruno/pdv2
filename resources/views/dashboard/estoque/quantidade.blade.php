@@ -31,13 +31,7 @@
                                         <img src="{{ asset('img/team-2.jpg') }}" class="avatar avatar-sm" alt="avatar" />
                                     </a>
                                     <ul class="dropdown-menu text-small">
-                                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Sair</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -47,7 +41,7 @@
             </nav>
             <div class="container-fluid py-4 px-5">
                 <div class="pb-3 card-body">
-                   
+
 
                     <form method="post" action="{{ route('add.quantidade') }}">
                         @csrf
