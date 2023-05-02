@@ -147,10 +147,7 @@
                                                                     <p class="text-sm font-weight-normal mb-0">Endereço: {{$fornecedor->endereco}}</p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-white"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-dark">Save
-                                                                        changes</button>
+                                                                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Fechar</button>
                                                                 </div>
                                                             </div>
                                                         </div>
