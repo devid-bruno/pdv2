@@ -75,63 +75,58 @@ class FinanceiroController extends Controller
     }
 
     public function gerarRelatório(){
-    $spreadsheet = new Spreadsheet();
+        $pedidos = Pedido::all()->groupBy(function($pedido) {
+            return DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('m');
+        });
 
-    // $aba2 = $spreadsheet->createSheet();
-    // $aba2->setTitle('Ganhos');
+        $spreadsheet = new Spreadsheet();
 
+        $spreadsheet->removeSheetByIndex(0);
 
-    // $aba2->setCellValue('A1', 'Diaria');
-    // $aba2->setCellValue('B1', 'Semanal');
-    // $aba2->setCellValue('C1', 'Mensal');
-    // $aba2->setCellValue('D1', 'MÊS REFERÊNCIA');
+        $meses = array(
+            1 => 'Janeiro',
+            2 => 'Fevereiro',
+            3 => 'Março',
+            4 => 'Abril',
+            5 => 'Maio',
+            6 => 'Junho',
+            7 => 'Julho',
+            8 => 'Agosto',
+            9 => 'Setembro',
+            10 => 'Outubro',
+            11 => 'Novembro',
+            12 => 'Dezembro'
+        );
 
-    // $hoje = Carbon::today();
-    // $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
+        foreach ($pedidos as $mes => $pedidos_mes) {
+            $sheet = $spreadsheet->createSheet();
+            $sheet->setTitle($meses[intval($mes)]);
 
-    // $dataInicioSemana = $hoje->startOfWeek();
-    // $valorTotal = Pedido::where('created_at', '>=', $dataInicioSemana)->where('status_id', 1)->sum('valor_total');
+            $sheet->setCellValue('A1', 'Cliente');
+            $sheet->setCellValue('B1', 'Produto');
+            $sheet->setCellValue('C1', 'Valor da venda');
+            $sheet->setCellValue('D1', 'Quantidade');
+            $sheet->setCellValue('E1', 'Pagamentos');
+            $sheet->setCellValue('F1', 'Dia Venda');
 
-    // $datames = $hoje->startOfMonth();
-    // $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
+            $linha = 2;
+            foreach ($pedidos_mes as $pedido) {
+                $sheet->setCellValue('A'.$linha, $pedido->cliente->nome);
+                $sheet->setCellValue('B'.$linha, $pedido->produto->nome_produto);
+                $sheet->setCellValue('C'.$linha, $pedido->valor_total);
+                $sheet->setCellValue('D'.$linha, $pedido->quantidade);
+                $sheet->setCellValue('E'.$linha, $pedido->forma_pagamento);
+                $sheet->setCellValue('F'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d') );
+                $linha++;
+            }
+        }
 
-    // $data = Pedido::latest()->value('created_at');
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'relatorio_vendas.xlsx';
+        $writer->save($filename);
 
-    // $linha = 2;
-    //     $aba2->setCellValue('A'.$linha, $valor_diaria);
-    //     $aba2->setCellValue('B'.$linha, $valorTotal);
-    //     $aba2->setCellValue('C'.$linha, $valorTotalmes);
-    //     $aba2->setCellValue('D'.$linha, $data->format('m'));
-    //     $linha++;
+        return response()->download($filename);
 
-
-    $sheet = $spreadsheet->getActiveSheet();
-    $sheet->setTitle('Vendas');
-    $sheet->setCellValue('A1', 'Cliente');
-    $sheet->setCellValue('B1', 'Produto');
-    $sheet->setCellValue('C1', 'Valor da venda');
-    $sheet->setCellValue('D1', 'Quantidade');
-    $sheet->setCellValue('E1', 'Pagamentos');
-    $sheet->setCellValue('F1', 'Dia Venda');
-    $sheet->setCellValue('G1', 'Mes Venda');
-    $pedidos = Pedido::all();
-    $linha = 2;
-    foreach ($pedidos as $pedido) {
-        $sheet->setCellValue('A'.$linha, $pedido->cliente->nome);
-        $sheet->setCellValue('B'.$linha, $pedido->produto->nome_produto);
-        $sheet->setCellValue('C'.$linha, $pedido->valor_total);
-        $sheet->setCellValue('D'.$linha, $pedido->quantidade);
-        $sheet->setCellValue('E'.$linha, $pedido->forma_pagamento);
-        $sheet->setCellValue('F'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d') );
-        $sheet->setCellValue('G'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('m') );
-        $linha++;
-    }
-
-    $writer = new Xlsx($spreadsheet);
-    $filename = 'relatorio_vendas.xlsx';
-    $writer->save($filename);
-
-    return response()->download($filename);
     }
 
     public function RelatórioRemessas(){
