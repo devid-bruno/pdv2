@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \App\Models\Role;
-
+use \App\Models\User;
 class CheckRole
 {
     /**
@@ -19,6 +19,9 @@ class CheckRole
         if (Auth::check() && Auth::user()->role_id == $role_id) {
             return $next($request);
         }
-        abort(403, 'Acesso negado.');
+
+        return redirect('/')
+            ->with('error', 'Acesso negado. Você não tem permissão para acessar esta página.')
+            ->with('timeout', 5);
     }
 }

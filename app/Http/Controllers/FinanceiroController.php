@@ -24,11 +24,6 @@ class FinanceiroController extends Controller
         return view('financeiro.index');
     }
 
-    public function qrcodes()
-    {
-        return view('info');
-    }
-
 
     public function imprimirNota($id)
 {
@@ -39,7 +34,7 @@ class FinanceiroController extends Controller
         // Cria o arquivo de texto com as informações da nota fiscal
 
 
-        $conteudoNota =  "  BRASIL CIMENTOS LTDA" . "\n";
+        $conteudoNota =  "  PALMEIRAS MATERIAS DE CONSTRUCAO LTDA" . "\n";
         $conteudoNota .= "  CNPJ: 43.888.244/0001-65" . "\n";
         $conteudoNota .= "  AV VAL PARAISO, 1601 - CJ PALMEIRAS 60870-440" . "\n";
         $conteudoNota .= "  TELEFONE: (85) 9 9126-3001" . "\n". "\n". "\n";

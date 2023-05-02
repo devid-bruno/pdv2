@@ -167,6 +167,16 @@
               </ul>
             </div>
           </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Financeiro-collapse" aria-expanded="true">
+              Financeiro
+            </button>
+            <div class="collapse" id="Financeiro-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="{{route('financeiro.home')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
     </div>
   </aside>
