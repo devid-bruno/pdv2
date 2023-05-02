@@ -90,6 +90,7 @@
     .bd-mode-toggle {
       z-index: 1500;
     }
+
   </style>
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start ps bg-white" id="sidenav-main">
@@ -105,7 +106,7 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                     Categorias
                 </button>
-                <div class="collapse show" id="home-collapse">
+                <div class="collapse" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route("categoria.lista")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route("categoria.adicionar")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Adicionar</a></li>
@@ -116,7 +117,7 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
                   Fornecedores
                 </button>
-                <div class="collapse show" id="dashboard-collapse">
+                <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('fornecedor.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route('fornecedor.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
@@ -127,7 +128,7 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#order-collapse" aria-expanded="true">
                   Produtos
                 </button>
-                <div class="collapse show" id="order-collapse">
+                <div class="collapse" id="order-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('produto.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route('quantidade.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
@@ -139,7 +140,7 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#-collapse" aria-expanded="true">
                   Pedidos
                 </button>
-                <div class="collapse show" id="-collapse">
+                <div class="collapse" id="-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('pedido.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route('pedido.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
@@ -150,7 +151,7 @@
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#ome-collapse" aria-expanded="true">
               Usuários
             </button>
-            <div class="collapse show" id="ome-collapse">
+            <div class="collapse" id="ome-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="{{route('adicionar')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
               </ul>
@@ -160,7 +161,7 @@
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#e-collapse" aria-expanded="true">
               Clientes
             </button>
-            <div class="collapse show" id="e-collapse">
+            <div class="collapse" id="e-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="{{route('clientes')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
               </ul>

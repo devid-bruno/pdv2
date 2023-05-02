@@ -36,10 +36,8 @@ class CategoriaController extends Controller
             'nome.required' => 'O campo categoria é obrigatório.',
             'nome.unique' => 'Categoria já cadastrada.'
         ]);
-
-        $category = new Categoria(['nome' => $request->input('nome')]);
-        $category->save();
-
+        
+        Categoria::create($request->all());
         return redirect()->route('categoria.lista')->withErrors(['categoria' => 'Categoria já existente.']);
     }
 

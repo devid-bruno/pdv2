@@ -44,14 +44,7 @@ class ClienteController extends Controller
             'telefone' => 'required|string'
         ]);
 
-        $cliente = new Cliente([
-            'nome' => $request->input('nome'),
-            'cpf' => $request->input('cpf'),
-            'endereco' => $request->input('endereco'),
-            'telefone' => $request->input('telefone'),
-        ]);
-
-        $cliente->save();
+        Cliente::create($request->all());
 
         return redirect()->route('clientes');
     }

@@ -77,34 +77,32 @@ class FinanceiroController extends Controller
     public function gerarRelatório(){
     $spreadsheet = new Spreadsheet();
 
-    $aba2 = $spreadsheet->createSheet();
-    $aba2->setTitle('Ganhos');
+    // $aba2 = $spreadsheet->createSheet();
+    // $aba2->setTitle('Ganhos');
 
 
-    $aba2->setCellValue('A1', 'Diaria');
-    $aba2->setCellValue('B1', 'Semanal');
-    $aba2->setCellValue('C1', 'Mensal');
-    $aba2->setCellValue('D1', 'MÊS REFERÊNCIA');
+    // $aba2->setCellValue('A1', 'Diaria');
+    // $aba2->setCellValue('B1', 'Semanal');
+    // $aba2->setCellValue('C1', 'Mensal');
+    // $aba2->setCellValue('D1', 'MÊS REFERÊNCIA');
 
-    $hoje = Carbon::today();
-    $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
+    // $hoje = Carbon::today();
+    // $valor_diaria = Pedido::where('created_at', '>=', $hoje)->where('status_id', 1)->sum('valor_total');
 
-    $dataInicioSemana = $hoje->startOfWeek();
-    $valorTotal = Pedido::where('created_at', '>=', $dataInicioSemana)->where('status_id', 1)->sum('valor_total');
+    // $dataInicioSemana = $hoje->startOfWeek();
+    // $valorTotal = Pedido::where('created_at', '>=', $dataInicioSemana)->where('status_id', 1)->sum('valor_total');
 
-    $datames = $hoje->startOfMonth();
-    $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
+    // $datames = $hoje->startOfMonth();
+    // $valorTotalmes = Pedido::where('created_at', '>=', $datames)->where('status_id', 1)->sum('valor_total');
 
-    $data = Pedido::latest()->value('created_at');
+    // $data = Pedido::latest()->value('created_at');
 
-    $linha = 2;
-        $aba2->setCellValue('A'.$linha, $valor_diaria);
-        $aba2->setCellValue('B'.$linha, $valorTotal);
-        $aba2->setCellValue('C'.$linha, $valorTotalmes);
-        $aba2->setCellValue('D'.$linha, $data->format('m'));
-        $linha++;
-
-
+    // $linha = 2;
+    //     $aba2->setCellValue('A'.$linha, $valor_diaria);
+    //     $aba2->setCellValue('B'.$linha, $valorTotal);
+    //     $aba2->setCellValue('C'.$linha, $valorTotalmes);
+    //     $aba2->setCellValue('D'.$linha, $data->format('m'));
+    //     $linha++;
 
 
     $sheet = $spreadsheet->getActiveSheet();
@@ -114,7 +112,8 @@ class FinanceiroController extends Controller
     $sheet->setCellValue('C1', 'Valor da venda');
     $sheet->setCellValue('D1', 'Quantidade');
     $sheet->setCellValue('E1', 'Pagamentos');
-    $sheet->setCellValue('F1', 'Data Venda');
+    $sheet->setCellValue('F1', 'Dia Venda');
+    $sheet->setCellValue('G1', 'Mes Venda');
     $pedidos = Pedido::all();
     $linha = 2;
     foreach ($pedidos as $pedido) {
@@ -123,7 +122,8 @@ class FinanceiroController extends Controller
         $sheet->setCellValue('C'.$linha, $pedido->valor_total);
         $sheet->setCellValue('D'.$linha, $pedido->quantidade);
         $sheet->setCellValue('E'.$linha, $pedido->forma_pagamento);
-        $sheet->setCellValue('F'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') );
+        $sheet->setCellValue('F'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d') );
+        $sheet->setCellValue('G'.$linha, DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('m') );
         $linha++;
     }
 
@@ -169,7 +169,7 @@ class FinanceiroController extends Controller
      * Show the form for creating a new resource.
      */
 
-     
+
     public function create()
     {
         //
