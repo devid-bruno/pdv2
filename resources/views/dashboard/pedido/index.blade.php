@@ -65,7 +65,7 @@ navbar-scroll="true">
                         </path>
                     </svg>
                 </span>
-                <input type="text" name="search" class="form-control form-control-sm" placeholder="Pesquiasar">
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="Pesquisar">
             </div>
             <button type="submit" class="btn btn-info">Filtrar</button>
         </div>
@@ -148,6 +148,9 @@ navbar-scroll="true">
                                             Quantidade:
                                             <strong>{{ $pedido->quantidade }}</strong>
                                             <br>
+                                            Data venda:
+                                            <strong>{{ \DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y')}}</strong>
+                                            <br>
                                             Endereço
                                             <strong>{{ $pedido->cliente->endereco }}</strong>
                                             <br>
@@ -182,7 +185,7 @@ navbar-scroll="true">
                                 <div class="my-auto">
                                     @if($pedido->status->id == 1)
                                         <div class="alert alert-success" role="alert">
-                                            Aprovado
+                                            Pago
                                         </div>
                                     @elseif($pedido->status->id == 2)
                                         <div class="alert alert-warning" role="alert">

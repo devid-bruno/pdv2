@@ -8,6 +8,7 @@ use App\Models\Estoque;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\Printer;
 use App\Models\Pedido;
+use App\Models\Produto;
 use App\Models\Financeiro;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -20,10 +21,23 @@ class FinanceiroController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+
     {
-        return view('financeiro.index');
+        $pedidos = Pedido::where('status_id', 1)->get();
+        $valoresTotais = [];
+
+        foreach ($pedidos as $pedido) {
+            $valorTotal = $pedido->valor_total;
+            $valoresTotais[] = $valorTotal;
+        }
+        $somaTotal = array_sum($valoresTotais);
+        return $somaTotal;
+
     }
 
+    public function despesas(){
+        return view('financeiro.despesas');
+    }
 
     public function imprimirNota($id)
 {

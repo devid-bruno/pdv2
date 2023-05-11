@@ -19,4 +19,8 @@ public function fornecedor()
 {
     return $this->belongsTo(Fornecedores::class);
 }
+public function pedidos()
+{
+    return $this->hasMany(Pedido::class);
+}
 }

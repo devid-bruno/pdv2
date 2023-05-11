@@ -75,6 +75,7 @@ Route::delete('/categoria/{id}/delete', [CategoriaController::class, 'destroy'])
 
 Route::prefix('financeiro')->group(function () {
     Route::get('/home', [FinanceiroController::class, 'index'])->name('financeiro.home');
+    Route::get('/despesas', [FinanceiroController::class, 'despesas'])->name('financeiro.despesas');
 });
 // Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro')->middleware('checkRole:2');
 Route::get('/imprimir-nota/{id}', [FinanceiroController::class, 'imprimirNota'])->name('nota');

@@ -90,13 +90,14 @@
     .bd-mode-toggle {
       z-index: 1500;
     }
+
   </style>
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand d-flex align-items-center m-0" href="{{route('users')}}">
-        <span class="font-weight-bold text-lg">Corporate UI</span>
+        <span class="font-weight-bold text-lg">Sistema</span>
       </a>
     </div>
     <div class="flex-shrink-0 p-3" style="width: 280px;">
@@ -105,18 +106,18 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                     Despesas
                 </button>
-                <div class="collapse show" id="home-collapse">
+                <div class="collapse" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{{route("categoria.lista")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listar</a></li>
+                    <li><a href="{{route("financeiro.despesas")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route("categoria.adicionar")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                   </ul>
                 </div>
               </li>
-              <li class="mb-1">
+              {{-- <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-                  Funcionários
+                  Fornecedores
                 </button>
-                <div class="collapse show" id="dashboard-collapse">
+                <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('fornecedor.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route('fornecedor.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
@@ -127,10 +128,10 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#order-collapse" aria-expanded="true">
                   Produtos
                 </button>
-                <div class="collapse show" id="order-collapse">
+                <div class="collapse" id="order-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('produto.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
-                    <li><a href="{{route('estoque.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
+                    <li><a href="{{route('quantidade.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Estoque</a></li>
                     <li><a href="{{route('produto.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
                 </ul>
                 </div>
@@ -139,7 +140,7 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#-collapse" aria-expanded="true">
                   Pedidos
                 </button>
-                <div class="collapse show" id="-collapse">
+                <div class="collapse" id="-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="{{route('pedido.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
                     <li><a href="{{route('pedido.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
@@ -150,7 +151,7 @@
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#ome-collapse" aria-expanded="true">
               Usuários
             </button>
-            <div class="collapse show" id="ome-collapse">
+            <div class="collapse" id="ome-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="{{route('adicionar')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
               </ul>
@@ -160,12 +161,22 @@
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#e-collapse" aria-expanded="true">
               Clientes
             </button>
-            <div class="collapse show" id="e-collapse">
+            <div class="collapse" id="e-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="{{route('clientes')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
               </ul>
             </div>
           </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Financeiro-collapse" aria-expanded="true">
+              Financeiro
+            </button>
+            <div class="collapse" id="Financeiro-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="{{route('financeiro.home')}}" class="link-dark d-inline-flex text-decoration-none rounded">Despesas</a></li>
+              </ul>
+            </div>
+          </li> --}}
         </ul>
     </div>
   </aside>
@@ -184,6 +195,24 @@
 <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
 <script src="{{asset("js/plugins/swiper-bundle.min.js")}}" type="text/javascript"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script>
+    // Seleciona os campos de valor unitário, quantidade e valor total
+    var valorUnitario = document.querySelector('input[name="valor_unitario"]');
+    var quantidade = document.querySelector('input[name="quantidade"]');
+    var valorTotal = document.querySelector('#valor_total');
+
+    // Adiciona um evento "change" aos campos de valor unitário e quantidade
+    valorUnitario.addEventListener('change', atualizaValorTotal);
+    quantidade.addEventListener('change', atualizaValorTotal);
+
+    // Função para atualizar o valor total com base no valor unitário e quantidade
+    function atualizaValorTotal() {
+        var valorUnitarioFloat = parseFloat(valorUnitario.value);
+        var quantidadeInt = parseInt(quantidade.value);
+        var valorTotalFloat = valorUnitarioFloat * quantidadeInt;
+        valorTotal.value = valorTotalFloat.toFixed(2); // Arredonda para 2 casas decimais
+    }
+</script>
 <script src="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.js"></script>
 <script src="{{ asset('js/corporate-ui-dashboard.min.js?v=1.0.0') }}"></script>
 </body>

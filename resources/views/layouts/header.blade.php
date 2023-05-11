@@ -173,7 +173,7 @@
             </button>
             <div class="collapse" id="Financeiro-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="{{route('financeiro.home')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
+                <li><a href="{{route('financeiro.home')}}" class="link-dark d-inline-flex text-decoration-none rounded">Despesas</a></li>
               </ul>
             </div>
           </li>

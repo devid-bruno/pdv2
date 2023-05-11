@@ -144,9 +144,11 @@ class PedidoController extends Controller
                     ->orWhere('forma_pagamento', 'LIKE', "%{$search}%")
                     ->orWhereHas('cliente', function ($query) use ($search) {
                         $query->where('nome', 'LIKE', "%{$search}%");
+                    })->orWhereHas('status', function ($query) use ($search) {
+                        $query->where('status', 'LIKE', "%{$search}%");
                     });
             }
-            $pedidos = $pedidos->paginate(2);
+            $pedidos = $pedidos->paginate(999999999);
             return view('dashboard.pedido.index', compact('pedidos'));
     }
 }
