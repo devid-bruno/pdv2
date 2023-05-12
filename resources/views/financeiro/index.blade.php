@@ -94,9 +94,9 @@
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7">Produto</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Valor Total que vendemos</th>
                                 <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Estoque unitário</th>
-                                {{-- <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Valor Total Vendido</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Forma Do Pagamento</th>
-                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Data Venda</th> --}}
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Total Quantidade vendido</th>
+                                <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Faturamento</th>
+                                {{--<th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Data Venda</th> --}}
                                 <th class="text-center text-secondary text-xs font-weight-semibold opacity-7"></th>
                               </tr>
                             </thead>
@@ -127,18 +127,18 @@
                                   <td>
                                       <div class="d-flex px-2">
                                           <div class="my-auto">
-                                              <h6 class="mb-0 text-sm">R$: {{number_format($produtoTotal['valorGastamos'], 2, ',', '.')}}</h6>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  {{--<td>
-                                      <div class="d-flex px-2">
-                                          <div class="my-auto">
-                                              <h6 class="mb-0 text-sm">{{$pedido->forma_pagamento}}</h6>
+                                              <h6 class="mb-0 text-sm">{{$produtoTotal['quantidade']}}</h6>
                                           </div>
                                       </div>
                                   </td>
                                   <td>
+                                      <div class="d-flex px-2">
+                                          <div class="my-auto">
+                                              <h6 class="mb-0 text-sm">R$: {{number_format($produtoTotal['faturamento'], 2, ',', '.')}}</h6>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  {{--<td>
                                       <div class="d-flex px-2">
                                           <div class="my-auto">
                                               <h6 class="mb-0 text-sm">{{ \DateTime::createFromFormat('Y-m-d', $pedido->data_venda)->format('d/m/Y') }}</h6>

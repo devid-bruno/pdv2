@@ -35,15 +35,26 @@ class FinanceiroController extends Controller
              $quantidade = $pedido->quantidade;
              $valorGastamos = $pedido->produto->estoque->valor_unitario;
 
+
              $valorGasto = $valorGastamos * $quantidade;
+             $paraVenderGastamos = $quantidade * $valorGastamos;
+
+             $faturamento = $valorTotal - $paraVenderGastamos;
              if (!isset($produtoTotals[$nomeProduto])) {
                  $produtoTotals[$nomeProduto] = [
                     'valor_total' => $valorTotal,
                     'valor_unitario' => $pedido->produto->estoque->valor_unitario,
-                    'valorGastamos' => $valorGasto
+                    'valorGastamos' => $valorGasto,
+                    'quantidade' => $quantidade,
+                    'paraVenderGastamos' => $paraVenderGastamos,
+                    'faturamento' => $faturamento
                  ];
              } else {
                 $produtoTotals[$nomeProduto]['valor_total'] += $valorTotal;
+                $produtoTotals[$nomeProduto]['valorGastamos'] += $valorGasto;
+                $produtoTotals[$nomeProduto]['quantidade'] += $quantidade;
+                $produtoTotals[$nomeProduto]['paraVenderGastamos'] += $paraVenderGastamos;
+                $produtoTotals[$nomeProduto]['faturamento'] += $faturamento;
              }
          }
 
