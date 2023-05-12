@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Support\Collection;
 use DateTime;
 class FinanceiroController extends Controller
 {
@@ -21,17 +22,32 @@ class FinanceiroController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-
     {
-        $pedidos = Pedido::where('status_id', 1)->get();
-        $valoresTotais = [];
+        $pedidos = Pedido::where('status_id', 1)
+        ->with('produto', 'produto.estoque')
+        ->get();
+         $produtos = Produto::whereIn('id', $pedidos->pluck('produto_id'))->get();
+         $produtoTotals = [];
 
-        foreach ($pedidos as $pedido) {
-            $valorTotal = $pedido->valor_total;
-            $valoresTotais[] = $valorTotal;
-        }
-        $somaTotal = array_sum($valoresTotais);
-        return $somaTotal;
+         foreach ($pedidos as $pedido) {
+             $nomeProduto = $pedido->produto->nome_produto;
+             $valorTotal = $pedido->valor_total;
+             $quantidade = $pedido->quantidade;
+             $valorGastamos = $pedido->produto->estoque->valor_unitario;
+
+             $valorGasto = $valorGastamos * $quantidade;
+             if (!isset($produtoTotals[$nomeProduto])) {
+                 $produtoTotals[$nomeProduto] = [
+                    'valor_total' => $valorTotal,
+                    'valor_unitario' => $pedido->produto->estoque->valor_unitario,
+                    'valorGastamos' => $valorGasto
+                 ];
+             } else {
+                $produtoTotals[$nomeProduto]['valor_total'] += $valorTotal;
+             }
+         }
+
+    return view('financeiro.index', compact('produtoTotals'));
 
     }
 
@@ -42,11 +58,7 @@ class FinanceiroController extends Controller
     public function imprimirNota($id)
 {
 
-    // Recupera a nota fiscal do banco de dados ou do sistema de arquivos
         $notaFiscal = Pedido::find($id);
-
-        // Cria o arquivo de texto com as informações da nota fiscal
-
 
         $conteudoNota =  "  PALMEIRAS MATERIAS DE CONSTRUCAO LTDA" . "\n";
         $conteudoNota .= "  CNPJ: 43.888.244/0001-65" . "\n";
@@ -71,8 +83,8 @@ class FinanceiroController extends Controller
         $conteudoNota .= "==============================================" . "\n";
         $conteudoNota .= "  *Este Ticket NAO e DOCUMENTO FISCAL*" . "\n";
         $conteudoNota .= "==============================================" . "\n";
-        $printer_ip = '192.168.1.87'; // IP da impressora
-        $connector = new NetworkPrintConnector($printer_ip, 9100); // 9100 é a porta padrão para impressoras na rede
+        $printer_ip = '192.168.1.87';
+        $connector = new NetworkPrintConnector($printer_ip, 9100);
         $printer = new Printer($connector);
         $printer->text($conteudoNota);
         $printer->cut();
@@ -147,10 +159,9 @@ class FinanceiroController extends Controller
     $sheet->setCellValue('C1', 'Remessas');
     $sheet->setCellValue('D1', 'Fornecedor');
 
-    // Busca todas as vendas no banco de dados
     $estoques = Estoque::all();
 
-    // Adiciona uma linha para cada venda
+
     $linha = 2;
     foreach ($estoques as $estoque) {
         $sheet->setCellValue('A'.$linha, $estoque->produto->nome_produto);
@@ -160,12 +171,12 @@ class FinanceiroController extends Controller
         $linha++;
     }
 
-    // Cria um novo objeto Xlsx Writer e salva a planilha em um arquivo
+
     $writer = new Xlsx($spreadsheet);
     $filename = 'relatorio_estoque.xlsx';
     $writer->save($filename);
 
-    // Retorna o arquivo para download
+
     return response()->download($filename);
     }
 
