@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFinanceiroRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateFinanceiroRequest;
 use App\Models\Estoque;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
@@ -10,6 +11,7 @@ use Mike42\Escpos\Printer;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Financeiro;
+use App\Models\despesa;
 use Carbon\Carbon;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -63,7 +65,28 @@ class FinanceiroController extends Controller
     }
 
     public function despesas(){
-        return view('financeiro.despesas');
+        $despesas = despesa::all();
+        return view('financeiro.despesas', compact('despesas'));
+    }
+
+    public function cadastrodespesa(Request $request){
+        $request->validate([
+            'quem_pagou' => 'required|string|max:255',
+            'forma_pagamento' => 'required|string|max:255',
+            'valor' => 'required|max:255',
+            'categoria' => 'required|string|max:255'
+        ]);
+
+        $despesa = new despesa([
+            'quem_pagou' => $request->input('quem_pagou'),
+            'forma_pagamento' => $request->input('forma_pagamento'),
+            'valor' => $request->input('valor'),
+            'categoria' => $request->input('categoria')
+        ]);
+
+        $despesa->save();
+
+        return redirect()->route('financeiro.despesas')->with('sucess', 'Despesa cadastrada com sucesso!');
     }
 
     public function imprimirNota($id)

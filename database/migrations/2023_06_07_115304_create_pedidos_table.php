@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('valor_total', 8, 2);
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('produto_id')->references('id')->on('produtos');
-            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('status_id')->references('id')->on('status');
             $table->foreign('entrega_id')->references('id')->on('entregas');
             $table->string('numero_pedido');
             $table->timestamp('created_at')->useCurrent();

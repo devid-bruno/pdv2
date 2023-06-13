@@ -108,23 +108,22 @@
                 </button>
                 <div class="collapse" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{{route("financeiro.despesas")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listar</a></li>
-                    <li><a href="{{route("categoria.adicionar")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                     <li><a href="{{route("financeiro.despesas")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Listar</a></li>
+                    {{--<li><a href="{{route("categoria.adicionar")}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Adicionar</a></li> --}}
                   </ul>
                 </div>
               </li>
-              {{-- <li class="mb-1">
+               <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-                  Fornecedores
+                  Funcionários
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{{route('fornecedor.lista')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li>
-                    <li><a href="{{route('fornecedor.add')}}" class="link-dark d-inline-flex text-decoration-none rounded">Adicionar</a></li>
+                     <li><a href="{{route('funcionarios.index')}}" class="link-dark d-inline-flex text-decoration-none rounded">Listar</a></li> 
                 </ul>
                 </div>
               </li>
-              <li class="mb-1">
+             {{-- <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#order-collapse" aria-expanded="true">
                   Produtos
                 </button>

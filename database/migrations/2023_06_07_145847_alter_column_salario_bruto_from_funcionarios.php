@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('status');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+        Schema::table('funcionarios', function (Blueprint $table) {
+            $table->string('salario_bruto')->nullable()->change();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('funcionarios', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categoria_fornecedores', function (Blueprint $table) {
+        Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fornecedores_id')->constrained();
-            $table->foreignId('categoria_id')->constrained();
+            $table->string('nome');
+            $table->date('data_contratacao');
+            $table->decimal('salario_bruto', 8, 2);
+            $table->string('funcao');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoria_fornecedores');
+        Schema::dropIfExists('funcionarios');
     }
 };

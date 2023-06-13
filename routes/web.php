@@ -10,6 +10,7 @@ use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\NotaFiscalController;
+use App\Http\Controllers\FuncionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,13 @@ Route::delete('/categoria/{id}/delete', [CategoriaController::class, 'destroy'])
 Route::prefix('financeiro')->group(function () {
     Route::get('/home', [FinanceiroController::class, 'index'])->name('financeiro.home');
     Route::get('/despesas', [FinanceiroController::class, 'despesas'])->name('financeiro.despesas');
+    Route::post('/cadastrodespesa', [FinanceiroController::class, 'cadastrodespesa'])->name('despesas.cadastro');
+    Route::get('/funcionarios', [FuncionarioController::class, 'index'])->name('funcionarios.index');
+    Route::post('/cadastrofuncionario', [FuncionarioController::class, 'cadastro'])->name('funcionarios.cadastro');
+    Route::get('/funcionarios/{id}/edit', [FuncionarioController::class, 'edicao'])->name('funcionarios.edit');
+    Route::put('/funcionarios/{id}', [FuncionarioController::class, 'update'])->name('funcionarios.update');
+    Route::delete('/funcionarios/{id}/delete', [FuncionarioController::class, 'destroy'])->name('funcionarios.destroy');
+
 });
 // Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro')->middleware('checkRole:2');
 Route::get('/imprimir-nota/{id}', [FinanceiroController::class, 'imprimirNota'])->name('nota');
